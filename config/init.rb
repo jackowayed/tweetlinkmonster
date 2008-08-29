@@ -57,9 +57,9 @@ Gem.path.unshift(Merb.root / "gems")
 Merb::BootLoader.after_app_loads do
   # Add dependencies here that must load after the application loads:
 
-  dependencies "merb_helpers", "merb-assets"
   # dependency "magic_admin" # this gem uses the app's model classes
 end
+dependencies "merb_helpers", "merb-assets"
 
 #
 # ==== Set up your ORM of choice
