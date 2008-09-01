@@ -8,6 +8,8 @@
 
 = form_for(@user, :action => url(:users) ) do |f|
   %p
+    = bound_text_area :username
+  %p
     = submit "Create"
 
 = link_to 'Back', url(:users)
