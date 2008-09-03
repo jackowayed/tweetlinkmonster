@@ -8,7 +8,11 @@
 
 = form_for(@user, :action => url(:users) ) do |f|
   %p
-    = bound_text_area :username
+    = text_field :username, :label => "Twitter username: "
+  %p
+    =  password_field :password, :label => "Twitter password: "
+  %p
+    = text_field :email, :label => "Email: "
   %p
     = submit "Create"
 

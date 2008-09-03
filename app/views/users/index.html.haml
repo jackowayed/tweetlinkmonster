@@ -4,15 +4,35 @@
   Edit this file in
   %tt
     app/views/users/index.html.erb
+%style{:type => "text/css"}
+  td {padding: 3px}
+  
 %table
   %tr
-  - for user in @users
+    %td
+      Username
+    %td
+      Password
+    %td
+      Username
+    %td
+      Username
+  = for user in @users
     %tr
+      %td
+        = user.username
+      %td
+        = user.password
+      %td
+        = user.email
+      %td
+        = user.id
       %td
         = link_to 'Show', url(:user, user)
       %td
         = link_to 'Edit', url(:edit_user,  user)
       %td
-        = delete_button :user, user
+        - if false
+          = delete_button :user, user
 
 = link_to 'New', url(:new_user)
