@@ -6,14 +6,6 @@
 
 = error_messages_for :user
 
-= form_for(@user, :action => url(:users) ) do |f|
-  %p
-    = text_field :username, :label => "Twitter username: "
-  %p
-    =  password_field :password, :label => "Twitter password: "
-  %p
-    = text_field :email, :label => "Email: "
-  %p
-    = submit "Create"
+= partial :form
 
 = link_to 'Back', url(:users)

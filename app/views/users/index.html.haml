@@ -14,9 +14,9 @@
     %td
       Password
     %td
-      Username
+      Email
     %td
-      Username
+      ID
   = for user in @users
     %tr
       %td
@@ -32,6 +32,7 @@
       %td
         = link_to 'Edit', url(:edit_user,  user)
       %td
+        = link_to 'Delete', url(:delete_user, user)
         - if false
           = delete_button :user, user
 

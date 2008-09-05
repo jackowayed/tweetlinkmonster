@@ -6,9 +6,7 @@
     app/views/users/edit.html.erb
 = error_messages_for :user
 
-- form_for(@user, :action => url(:user, @user)) do
-  %p
-    = submit_button "Update"
+= partial :form
 
 = link_to 'Show', url(:user, @user)
 |

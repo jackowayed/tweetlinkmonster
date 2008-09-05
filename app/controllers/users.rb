@@ -27,9 +27,11 @@ class Users < Application
 
   def create
     @user = User.new(params[:user])
+    logger.warn("User before save: #{@user}")
     if @user.save
       redirect url(:user, @user)
     else
+      raise NotImplemented
       render :new
     end
   end
