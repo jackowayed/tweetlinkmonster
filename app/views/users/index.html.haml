@@ -17,7 +17,7 @@
       Email
     %td
       ID
-  = for user in @users
+  - for user in @users
     %tr
       %td
         = user.username
@@ -33,7 +33,5 @@
         = link_to 'Edit', url(:edit_user,  user)
       %td
         = link_to 'Delete', url(:delete_user, user)
-        - if false
-          = delete_button :user, user
 
 = link_to 'New', url(:new_user)
