@@ -54,5 +54,10 @@ class Users < Application
       raise BadRequest
     end
   end
+  def feed
+    only_provides :xml
+    raise NotFound unless @user = User.find_by_username(params[:username]) 
+    
+  end
 
 end # Users
