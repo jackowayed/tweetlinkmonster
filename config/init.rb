@@ -29,8 +29,7 @@
 # Since RubyGems will search merb_app_root/gems for dependencies, order
 # in the statement above is important: we need to install ActiveSupport which
 # ActiveRecord depends on first.
-#
-# Remember that bundling of dependencies as gems with your application
+# # Remember that bundling of dependencies as gems with your application
 # makes it independent of the environment it runs in and is a very
 # good, encouraged practice to follow.
 Gem.clear_paths
