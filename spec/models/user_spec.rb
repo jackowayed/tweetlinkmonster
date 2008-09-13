@@ -24,6 +24,9 @@ describe User do
   after(:each) do
     @user.destroy
   end
+  it "should run specs and fail" do
+    true.should_not == "false"
+  end
   it "should require a username" do
     @user.attributes = valid_fake_user_attributes.except(:username)
     @user.save.should == false

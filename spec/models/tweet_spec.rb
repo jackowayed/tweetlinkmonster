@@ -35,7 +35,41 @@ describe Tweet do
     @tweet.delete_if_expired
     @tweet.new_record?.should be_false
   end
-
-
+  it "should return a website for a www website" do
+    @tweet.text = "stuff and www.google.com and stuff"
+    @tweet.website.should == "www.google.com"
+  end
+  it "should return a website for an http:// website" do
+    @tweet.text = "stuff and http://google.com and stuff"
+    @tweet.website.should == "http://google.com"
+  end
+  it "should return the full http:// for a http://www website" do
+    @tweet.text = "stuff and http://www.google.com and stuff"
+    @tweet.website.should == "http://www.google.com"
+  end
+  it "should not return a trailing . in a website" do
+    @tweet.text = "stuff and http://www.google.com. and stuff"
+    @tweet.website.should == "http://www.google.com"
+  end
+  it "should not return a trailing ) in a website" do
+    @tweet.text = "stuff and http://www.google.com) and stuff"
+    @tweet.website.should == "http://www.google.com"
+  end
+  it "should not return a trailing ] in a website" do
+    @tweet.text = "stuff and http://www.google.com] and stuff"
+    @tweet.website.should == "http://www.google.com"
+  end
+  it "should not return a trailing ! in a website" do
+    @tweet.text = "stuff and http://www.google.com! and stuff"
+    @tweet.website.should == "http://www.google.com"
+  end
+  it "should not return a trailing ? in a website" do
+    @tweet.text = "stuff and http://www.google.com? and stuff"
+    @tweet.website.should == "http://www.google.com"
+  end
+  it "should not return any trailing special character but /" do
+    @tweet.text = "stuff and http://www.google.com&"
+    @tweet.website.should == "http://www.google.com"
+  end
 
 end

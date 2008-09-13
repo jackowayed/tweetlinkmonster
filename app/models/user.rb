@@ -25,13 +25,13 @@ class User
       tweets = self.get_tweets(x)
       page = 1
       unless self.last_tweet_seen.nil? || self.last_tweet_seen == 0
-        tweets += get_tweets(page+=1) unless tweets[-1].id == self.last_tweet_seen
+        until tweets[-1].id == self.last_tweet_seen
+          tweets += get_tweets(page+=1)
+        end
       end
       tweets.each do |t|
-        if website?(t.text)
-          tweet = Tweet.new(:id => t.id, :user_id => self.id, :text => t.text, :created_at => t.created_at)
-          tweet.save
-        end
+        tweet = Tweet.new({:user_id => self.id, :text => t.text, :created_at => t.created_at})
+        tweet.save if t.user.screen_name != self.username && tweet.website
       end
     rescue
       Merb.logger.error("Exception #{$!} occurred")
@@ -42,8 +42,7 @@ class User
   end
  def expire_tweets
     self.tweets.each do |t|
-      t.delete_if_expired
-    end
+      t.delete_if_expired end
   end
 
   #validates_uniqueness_of :username
