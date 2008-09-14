@@ -57,6 +57,11 @@ class Users < Application
   def feed
     only_provides :xml
     raise NotFound unless @user = User.find_by_username(params[:username]) 
+    @user.tweets.each do |t|
+      t.delete_if_expired
+    end
+    @user.update_tweets
+    render
     
   end
 
