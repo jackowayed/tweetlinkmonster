@@ -15,7 +15,7 @@
   -@user.tweets.each do |tweet|
     %entry
       %title
-        Link
+        =find_site_title(tweet.website)
       %link{:href => tweet.website}
       %id
         http://www.twitterlinks.com
