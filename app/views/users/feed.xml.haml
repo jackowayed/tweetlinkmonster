@@ -10,12 +10,12 @@
     %name
       Daniel Jackoway
   %id
-    http://www.twitterlinks.com
+    =@user.nil?
 
   -@user.tweets.each do |tweet|
     %entry
       %title
-        =find_site_title(tweet.website)
+        =tweet.title
       %link{:href => tweet.website}
       %id
         http://www.twitterlinks.com

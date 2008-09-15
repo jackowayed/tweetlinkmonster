@@ -13,7 +13,11 @@ module Merb
       # You should choose better exception.
       return "" if limit == 0
       
-      response = Net::HTTP.get_response(URI.parse(uri_str))
+      begin
+        response = Net::HTTP.get_response(URI.parse(uri_str))
+      rescue
+        return false
+      end
       case response
       when Net::HTTPSuccess     then response
       when Net::HTTPRedirection then fetch(response['location'], limit - 1)
@@ -22,7 +26,8 @@ module Merb
       end
     end
     def find_site_title(url)
-      webpage_title(fetch(url).body)
+      return false unless x = fetch(url)
+      webpage_title(x.body)
     end
 
 

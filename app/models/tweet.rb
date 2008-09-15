@@ -5,6 +5,7 @@ class Tweet
   property :user_id, Integer, :nullable => false
   property :text, String, :nullable => false, :length => 140
   property :created_at, DateTime, :nullable => false
+  property :title, String, :length => 1000
 
   def delete_if_expired
     self.destroy if (Time.now - 1.week) > self.created_at 

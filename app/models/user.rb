@@ -23,8 +23,12 @@ class User
     begin
       x.verify_credentials
       tweets = self.get_tweets(x)
+      last = self.last_tweet_seen
+      self.last_tweet_seen = tweets[0].id
+      self.update
+      Merb.logger.warn(tweets[0].id)
       page = 1
-      unless self.last_tweet_seen.nil? || self.last_tweet_seen == 0
+      unless last.nil? || last == 0
         until tweets[-1].id == self.last_tweet_seen
           tweets += get_tweets(page+=1)
         end
