@@ -7,7 +7,7 @@ class User
 
   property :id, Integer, :serial => true, :nullabe => false
 
-  property :password, String, :nullabe => false
+  property :pass_hash, String, :nullabe => false, :length => 64
 
   property :email, String, :nullable => false, :unique => true, :format => :email_address
 
@@ -44,9 +44,21 @@ class User
     end
     return true
   end
- def expire_tweets
+  def expire_tweets
     self.tweets.each do |t|
       t.delete_if_expired end
+  end
+  def password
+    crypt = crypt_obj
+    return crypt.decrypt_string(self.pass_hash)
+  end
+  def password=(pass)
+    crypt = crypt_obj
+    self.pass_hash = crypt.encrypt_string(pass)
+  end
+  def crypt_obj
+    require 'crypt/rijndael'
+    Crypt::Rijndael.new("thiskey!"*2)
   end
 
   #validates_uniqueness_of :username
