@@ -25,7 +25,7 @@ class Application < Merb::Controller
   end
   def find_site_title(url)
     return nil unless x = fetch(url)
-    webpage_title(x.body)
+    webpage_title(x.body).gsub(/&[A-z].{2,9};/, "-")
   end
 
 end

@@ -10,7 +10,7 @@
     %name
       Daniel Jackoway
   %id
-    =@user.nil?
+    =@user.nil?.to_s + @user.tweets.count.to_s
 
   -@user.tweets.each do |tweet|
     %entry

@@ -50,6 +50,7 @@ class User
   end
   def password
     crypt = crypt_obj
+    return nil unless self.pass_hash
     return crypt.decrypt_string(self.pass_hash)
   end
   def password=(pass)
