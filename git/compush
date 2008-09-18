@@ -1,0 +1,13 @@
+#!/bin/bash
+while [ "$1" != "" ]; do
+    case $1 in
+        -m | --message )        shift
+                                message=$1
+                                ;;
+        * )                     exit 1
+    esac
+    shift
+done
+git add .
+git commit -m message
+git push origin master
