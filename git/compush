@@ -8,6 +8,7 @@ while [ "$1" != "" ]; do
     esac
     shift
 done
+echo message
 git add .
 git commit -m message
 git push origin master
