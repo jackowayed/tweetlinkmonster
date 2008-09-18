@@ -9,5 +9,5 @@ while [ "$1" != "" ]; do
     shift
 done
 git add .
-git commit -m \'$message\'
+git commit -m "'"$message"'"
 git push origin master
