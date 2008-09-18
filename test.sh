@@ -1,3 +1,3 @@
 #!/bin/bash
 git add .
-git commit -m "hello hello"
+git commit -m "no hello hello"
