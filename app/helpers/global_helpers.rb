@@ -29,6 +29,7 @@ module Merb
       return false unless x = fetch(url)
       webpage_title(x.body)
     end
+    
 
 
   end

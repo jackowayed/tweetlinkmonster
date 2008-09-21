@@ -19,5 +19,15 @@ class Tweet
     return nil if x.blank?
     x
   end
-
+  def html_entities_to_xml(str)
+    x = HTMLEntities.new
+    x.encode(x.decode(str), :decimal)
+  end
+  after :text= do
+    self.attribute_set(:text, html_entities_to_xml(self.text)) if self.text
+  end
+  after :title= do
+    self.attribute_set(:title, html_entities_to_xml(self.title)) if self.title
+    true
+  end
 end
