@@ -18,7 +18,7 @@ class User
     options = {:page => page}
     options[:since_id] = self.last_tweet_seen if self.last_tweet_seen
     Merb.logger.warn options.to_s
-    tweets = twitter_obj.timeline(:friends, options)
+    twitter_obj.timeline(:friends, options)
   end
   def update_tweets
     x = Twitter::Base.new(self.username, self.password)
@@ -26,13 +26,14 @@ class User
       x.verify_credentials
       tweets = self.get_tweets(x)
       last = self.last_tweet_seen
-      self.last_tweet_seen = tweets[0].id.to_i
+      self.last_tweet_seen = tweets[0].id.to_i if tweets[0]
       self.update
-      Merb.logger.warn(tweets[0].id)
+      #Merb.logger.warn tweets[0].object_id
+      #Merb.logger.warn tweets[0].id
       page = 1
       tweet_page = [nil]
       unless last.nil? || last == 0
-        until tweets[-1].id == last || page==10 || tweet_page.empty?
+        until tweets[-1].id == last || page==10 || tweet_page.empty? || tweets.empty?
           tweet_page =get_tweets(x, page+=1) 
           tweets += tweet_page
           Merb.logger.warn tweet_page.length
@@ -40,7 +41,7 @@ class User
       end
       tweets.each do |t|
         tweet = Tweet.new({:user_id => self.id, :text => t.text, :created_at => t.created_at})
-        tweet.save unless t.user.screen_name == self.username || tweet.website
+        tweet.save if t.user.screen_name != self.username && tweet.website
       end
     rescue
       Merb.logger.error("Exception #{$!} occurred")
