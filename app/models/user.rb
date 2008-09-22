@@ -11,11 +11,13 @@ class User
 
   property :email, String, :nullable => false, :unique => true, :format => :email_address
 
-  property :last_tweet_seen, Integer
+  property :last_tweet_seen, Integer, :precision => 64
 
   def get_tweets(twitter_obj, page = 1)
-    options = {}
+    Merb.logger.warn "get_tweets called"
+    options = {:page => page}
     options[:since_id] = self.last_tweet_seen if self.last_tweet_seen
+    Merb.logger.warn options.to_s
     tweets = twitter_obj.timeline(:friends, options)
   end
   def update_tweets
@@ -24,18 +26,21 @@ class User
       x.verify_credentials
       tweets = self.get_tweets(x)
       last = self.last_tweet_seen
-      self.last_tweet_seen = tweets[0].id
+      self.last_tweet_seen = tweets[0].id.to_i
       self.update
       Merb.logger.warn(tweets[0].id)
       page = 1
+      tweet_page = [nil]
       unless last.nil? || last == 0
-        until tweets[-1].id == self.last_tweet_seen
-          tweets += get_tweets(page+=1)
+        until tweets[-1].id == last || page==10 || tweet_page.empty?
+          tweet_page =get_tweets(x, page+=1) 
+          tweets += tweet_page
+          Merb.logger.warn tweet_page.length
         end
       end
       tweets.each do |t|
         tweet = Tweet.new({:user_id => self.id, :text => t.text, :created_at => t.created_at})
-        tweet.save if t.user.screen_name != self.username && tweet.website
+        tweet.save unless t.user.screen_name == self.username || tweet.website
       end
     rescue
       Merb.logger.error("Exception #{$!} occurred")

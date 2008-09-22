@@ -60,7 +60,7 @@ class Users < Application
     @user.update_tweets
     @user.tweets.each do |t|
       t.delete_if_expired
-      t.destroy unless (t.title ||= find_site_title(t.website))
+      (t.title ||= find_site_title(t.website))?(t.update):(t.destroy)
     end
     render
     

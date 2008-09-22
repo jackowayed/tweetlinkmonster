@@ -9,4 +9,9 @@
 
 :production:
   <<: *defaults
+  :apapter: mysql
   :database: db/production.sqlite3.db
+  :username:
+  :password:
+  :host: localhost
+  :socket:
