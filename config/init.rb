@@ -20,8 +20,7 @@
 #
 # An example:
 #
-# You want to bundle ActiveRecord and ActiveSupport with your Merb
-# application to be deployment environment independent. To do so,
+# You want to bundle ActiveRecord and ActiveSupport with your Merb # application to be deployment environment independent. To do so,
 # install gems into merb_app_root/gems directory like this:
 #
 # gem install -i merb_app_root/gems activesupport-post-2.0.2.gem activerecord-post-2.0.2.gem
@@ -58,7 +57,7 @@ Merb::BootLoader.after_app_loads do
 
   # dependency "magic_admin" # this gem uses the app's model classes
 end
-dependencies "merb_helpers", "merb-assets", "dm-validations", "dm-ar-finders", "twitter", "htmlentities"
+dependencies "merb_helpers", "merb-assets", "twitter", "dm-ar-finders","dm-validations", "htmlentities"
 
 #
 # ==== Set up your ORM of choice
