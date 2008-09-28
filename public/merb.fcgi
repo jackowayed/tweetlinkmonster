@@ -1,6 +1,10 @@
 #!/usr/bin/env ruby
                                                                
 require 'rubygems'
+if File.directory?(gems_dir = File.join(Dir.pwd, 'gems')) ||
+   File.directory?(gems_dir = File.join(File.dirname(__FILE__), '..', 'gems'))
+  $BUNDLE = true; Gem.clear_paths; Gem.path.unshift(gems_dir)
+end
 require 'merb-core'
 
 # this is Merb.root, change this if you have some funky setup.

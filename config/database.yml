@@ -10,8 +10,7 @@
 :production:
   <<: *defaults
   :apapter: mysql
-  :database: db/production.sqlite3.db
-  :username:
-  :password:
+  :database: tlm_tweetlinkmonster
+  :username: tlm_tlm
+  :password: guessy3cant!
   :host: localhost
-  :socket:
