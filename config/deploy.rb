@@ -3,6 +3,8 @@ set :repository,  "git@github.com:ivey/tweetlinkmonster.git"
 
 set :deploy_to, "~/apps/#{application}"
 
+set :use_sudo, false
+
 
 
 # If you aren't deploying to /u/apps/#{application} on the target

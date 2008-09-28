@@ -1,10 +1,10 @@
 class Users < Application
   # provides :xml, :yaml, :js
 
-  def index
-    @users = User.all
-    display @users
-  end
+  #def index
+  #  @users = User.all
+  #  display @users
+  #end
 
   def show
     @user = User.get(params[:id])
