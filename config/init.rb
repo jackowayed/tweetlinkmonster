@@ -57,8 +57,7 @@ Merb::BootLoader.after_app_loads do
 
   # dependency "magic_admin" # this gem uses the app's model classes
 end
-dependencies "dm-validations", "htmlentities", "dm-ar-finders"
-dependencies "merb_helpers", "merb-assets", "twitter"
+dependencies "dm-validations", "htmlentities", "dm-ar-finders", "merb_helpers", "merb-assets", "twitter"
 
 #
 # ==== Set up your ORM of choice
@@ -129,7 +128,7 @@ Merb::Config.use do |c|
   # There are various options here, by default Merb comes with 'cookie', 
   # 'memory' or 'memcached'.  You can of course use your favorite ORM 
   # instead: 'datamapper', 'sequel' or 'activerecord'.
-  c[:session_store] = 'cookie'
+  c[:session_store] = 'datamapper'
 end
 
 
