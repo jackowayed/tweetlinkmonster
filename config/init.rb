@@ -57,8 +57,8 @@ Merb::BootLoader.after_app_loads do
 
   # dependency "magic_admin" # this gem uses the app's model classes
 end
-dependencies "merb_helpers", "merb-assets", "twitter", "dm-ar-finders","dm-validations", "htmlentities"
-
+dependencies "merb_helpers", "merb-assets", "twitter", "htmlentities"
+, "dm-ar-finders","dm-validations"
 #
 # ==== Set up your ORM of choice
 #
