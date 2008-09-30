@@ -128,7 +128,7 @@ Merb::Config.use do |c|
   # There are various options here, by default Merb comes with 'cookie', 
   # 'memory' or 'memcached'.  You can of course use your favorite ORM 
   # instead: 'datamapper', 'sequel' or 'activerecord'.
-  c[:session_store] = 'datamapper'
+  c[:session_store] = 'cookie'
 end
 
 

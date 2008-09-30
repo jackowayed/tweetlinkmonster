@@ -1,3 +1,4 @@
+#!/home/tlm/ruby-base/bin/ruby 
 #!/usr/bin/env ruby
                                                                
 require 'rubygems'
