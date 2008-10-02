@@ -8,7 +8,6 @@
   :database: db/test.sqlite3.db
 
 :production:
-  <<: *defaults
   :apapter: mysql
   :database: tlm_tweetlinkmonster
   :username: tlm_tlm
