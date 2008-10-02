@@ -1,4 +1,10 @@
 class Application < Merb::Controller
+  before :dump_request
+  def dump_request
+    Merb.logger.info request.to_yaml
+  end
+
+
   require 'net/http'
   require 'uri'
   def webpage_title(page)
