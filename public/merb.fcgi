@@ -1,11 +1,7 @@
 #!/home/tlm/ruby-base/bin/ruby 
-#!/usr/bin/env ruby
                                                                
 require 'rubygems'
-if File.directory?(gems_dir = File.join(Dir.pwd, 'gems')) ||
-   File.directory?(gems_dir = File.join(File.dirname(__FILE__), '..', 'gems'))
-  $BUNDLE = true; Gem.clear_paths; Gem.path.unshift(gems_dir)
-end
+ENV['GEM_HOME']='/home/tlm/lib/ruby/gems/1.8'
 require 'merb-core'
 
 # this is Merb.root, change this if you have some funky setup.
