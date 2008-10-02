@@ -127,6 +127,10 @@ DESC
     end
   end
   
+  after :symlink do
+    run "chmod g-w -R ~/apps/tweetlinkmonster/"
+  end
+
 end
 
 namespace :logs do
