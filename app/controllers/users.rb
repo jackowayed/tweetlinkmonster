@@ -65,5 +65,8 @@ class Users < Application
     render
     
   end
+  def homepage
+    render
+  end
 
 end # Users

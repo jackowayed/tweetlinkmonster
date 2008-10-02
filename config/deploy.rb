@@ -47,8 +47,8 @@ namespace :deploy do
   #end
   desc "Restart the web server. Overrides the default task for Site5 use"
   task :restart, :roles => :app do
-    run "cd /home/#{user}; rm -rf public_html/tlm; ln -s #{current_path}/publ
-ic ./public_html/tlm"
+    run "cd /home/#{user}; rm -rf public_html; ln -s #{current_path}/publ
+ic ./public_html"
   run "skill -9 -u #{user} -c merb.fcgi"
   end
 
