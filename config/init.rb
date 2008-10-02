@@ -1,3 +1,8 @@
+class Merb::Request
+  def uri
+    @env['REDIRECT_URL'] || @env['REQUEST_PATH'] || @env['REQUEST_URI'] || path_info
+  end
+end
 #
 # ==== Structure of Merb initializer
 #

@@ -127,7 +127,7 @@ DESC
     end
   end
   
-  after :symlink do
+  after deploy.symlink do
     run "chmod g-w -R ~/apps/tweetlinkmonster/"
   end
 
