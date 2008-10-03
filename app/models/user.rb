@@ -7,7 +7,7 @@ class User
 
   property :id, Integer, :serial => true, :nullabe => false
 
-  property :pass_hash, String, :nullabe => false, :length => 64
+  property :pass_hash, Object, :nullabe => false, :length => 64
 
   property :email, String, :nullable => false, :unique => true, :format => :email_address
 
