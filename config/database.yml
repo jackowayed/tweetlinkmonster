@@ -8,7 +8,7 @@
   :database: db/test.sqlite3.db
 
 :production:
-  :apapter: mysql
+  :adapter: mysql
   :database: tlm_tweetlinkmonster
   :username: tlm_tlm
   :password: guessy3cant!
