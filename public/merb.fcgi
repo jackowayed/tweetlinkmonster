@@ -16,9 +16,10 @@ unless ENV["INLINEDIR"] || ENV["HOME"]
   end                
   ENV["INLINEDIR"] = tmpdir
 end
-ENV["MERB_ENV"]= 'production'
+#ENV["MERB_ENV"]= 'production'
    
 # start merb with the fcgi adapter, add options or change the log dir here
 Merb.start(:adapter => 'fcgi',
            :merb_root => merb_root,
-           :log_file => merb_root /'log'/'merb.log')
+           :log_file => merb_root /'log'/'merb.log',
+           :environment => 'production')
