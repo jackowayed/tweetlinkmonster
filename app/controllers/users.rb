@@ -5,6 +5,14 @@ class Users < Application
   #  @users = User.all
   #  display @users
   #end
+  before :check_login, :only => [:show, :edit, :update, :destroy]
+  def check_login
+    #Merb.logger.warn(params[:id])
+    #Merb.logger.warn((session[:user_id]).to_s)
+    #Merb.logger.warn(logged_in?.to_s)
+    #Merb.logger.warn((session[:user_id]==params[:id].to_i).to_s)
+    redirect url(:index) unless logged_in? && session[:user_id]==params[:id].to_i
+  end
 
   def show
     @user = User.get(params[:id])
@@ -29,7 +37,7 @@ class Users < Application
     @user = User.new(params[:user])
     Merb.logger.warn("User before save: #{@user.to_yaml}")
     if @user.save
-      redirect url(:user, @user)
+      redirect url(:user, @user.id)
     else
       render :new
     end

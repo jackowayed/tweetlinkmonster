@@ -1,0 +1,9 @@
+= (session[:failed_login?])?("Your username & password combination was wrong."):("")
+- session[:failed_login?]=false
+= form_for(@use, :action => url({:controller => 'main', :action => 'verify_login'})) do |f|
+  %p
+    = text_field :username, :label => "Twitter username: "
+  %p
+    = password_field :password, :label => "Twitter password: ", :length => 47
+  %p
+    = submit "Create"

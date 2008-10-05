@@ -7,7 +7,7 @@ class User
 
   property :id, Integer, :serial => true, :nullabe => false
 
-  property :pass_hash, Object, :nullabe => false, :length => 64
+  property :pass_hash, String, :nullabe => false, :length => 66
 
   property :email, String, :nullable => false, :unique => true, :format => :email_address
 
@@ -55,15 +55,15 @@ class User
       t.delete_if_expired end
   end
   def password
-    crypt = crypt_obj
+    crypt = User.crypt_obj
     return nil unless self.pass_hash
-    return crypt.decrypt_string(self.pass_hash)
+    return crypt.decrypt_string(Base64.decode64(self.pass_hash))
   end
   def password=(pass)
-    crypt = crypt_obj
-    self.pass_hash = crypt.encrypt_string(pass)
+    crypt = User.crypt_obj
+    self.pass_hash = Base64.encode64(crypt.encrypt_string(pass))
   end
-  def crypt_obj
+  def self.crypt_obj
     require 'crypt/rijndael'
     Crypt::Rijndael.new("thiskey!"*2)
   end

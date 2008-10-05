@@ -54,7 +54,7 @@ ic ./public_html"
 
   desc "Migrate the database"
   task :migrate do
-    run "cd #{current_release}; rake dm:db:automigrate MERB_ENV=production"
+    run "cd #{current_release}; ~/lib/ruby/gems/1.8/gems/rake-0.8.3/bin/rake dm:db:automigrate MERB_ENV=production"
   end
 
   desc "Do a full deployment"

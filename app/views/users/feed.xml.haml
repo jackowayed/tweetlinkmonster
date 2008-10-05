@@ -12,7 +12,7 @@
   %id
     =@user.nil?.to_s + @user.tweets.count.to_s
 
-  -@user.tweets.each do |tweet|
+  -Tweet.all(:user_id => @user.id, :order => [:created_at.desc]).each do |tweet|
     %entry
       %title
         =tweet.title

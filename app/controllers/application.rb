@@ -1,12 +1,10 @@
 class Application < Merb::Controller
-  before :dump_request
-  def dump_request
-    Merb.logger.info request.to_yaml
-  end
 
 
   require 'net/http'
   require 'uri'
+
+
   def webpage_title(page)
     str = /<title>.+?<\/title>/ =~ page
     return "Title Not Found" unless str
@@ -32,6 +30,9 @@ class Application < Merb::Controller
   def find_site_title(url)
     return nil unless x = fetch(url)
     webpage_title(x.body)#.gsub(/&[A-z].{2,9};/, "-")
+  end
+  def logged_in?
+    session[:user_id]
   end
 
 end

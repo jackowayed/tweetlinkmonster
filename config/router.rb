@@ -29,8 +29,9 @@ Merb::Router.prepare do |r|
   # routes, you may want to comment/remove this line to prevent
   # clients from calling your create or destroy actions with a GET
   r.resources :users
-  r.match('/feed/:username.xml').to(:controller => 'users', :action => 'feed')
-  r.match('/').to(:controller => 'main', :action => 'index')
+  r.match('/feed/:username').to(:controller => 'users', :action => 'feed')
+  r.match('/').to(:controller => 'main', :action => 'index').name(:index)
+  r.match('/login').to(:controller => 'main', :action => 'login').name(:login)
   
   r.default_routes
 
