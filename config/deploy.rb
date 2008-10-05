@@ -118,7 +118,7 @@ DESC
       started = ENV['STARTED']
       reason = ENV['REASON']
       deadline = ENV['UNTIL']
-      tz = TZInfo::Timezone.get('America/New_York')
+      #tz = TZInfo::Timezone.get('America/New_York')
  
       template = File.read('./app/views/layout/maintenance.html.haml')
       result = HAML::Template.new(template).render(binding)
