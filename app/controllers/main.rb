@@ -14,7 +14,7 @@ class Main < Application
     @user = User.find_by_username(params[:user][:username])
     session[:user_id]=@user.id if @user && @user.password==params[:user][:password]
     session[:failed_login?]=false
-    return redirect url(:user, @user.id) if logged_in?
+    return redirect(url(:user, @user.id)) if logged_in?
     session[:failed_login?]=true
     redirect url(:login)
     

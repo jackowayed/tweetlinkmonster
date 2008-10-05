@@ -7,7 +7,7 @@ class User
 
   property :id, Integer, :serial => true, :nullabe => false
 
-  property :pass_hash, String, :nullabe => false, :length => 66
+  property :pass_hash, String, :nullabe => false, :length => 48
 
   property :email, String, :nullable => false, :unique => true, :format => :email_address
 
@@ -65,7 +65,7 @@ class User
   end
   def self.crypt_obj
     require 'crypt/rijndael'
-    Crypt::Rijndael.new("thiskey!"*2)
+    Crypt::Rijndael.new((Merb.env=="production")?("odiosh4redhostingsomuch!merbcool"):("thiskey!"*2))
   end
   def change_to_rand_pass
     self.password=User.random_password
