@@ -64,6 +64,7 @@ class Users < Application
   end
   def feed
     only_provides :xml
+    Merb.logger.warn("params[:username]#{params.to_s}")
     raise NotFound unless @user = User.find_by_username(params[:username]) 
     @user.update_tweets
     @user.tweets.each do |t|
@@ -72,9 +73,6 @@ class Users < Application
     end
     render
     
-  end
-  def homepage
-    render
   end
 
 end # Users

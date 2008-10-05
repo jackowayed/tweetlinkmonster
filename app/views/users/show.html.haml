@@ -1,10 +1,17 @@
-%h1
-  Users controller, show action
-%p
-  Edit this file in
-  %tt
-    app/views/users/show.html.erb
+-#
+  %h1
+    Users controller, show action
+  %p
+    Edit this file in
+    %tt
+      app/views/users/show.html.erb
 
-= link_to 'Edit',  url(:edit_user,  @user)
-|
-= link_to 'Back', url(:users)
+-#
+  = link_to 'Edit',  url(:edit_user,  @user)
+  |
+  = link_to 'Back', url(:users)
+%p
+  Your feed: 
+  -#=link_to feed, url(:feed, @user)
+  -feed ="http://www.tweetlinkmonster.com/feed/#{@user.username}.xml" 
+  =link_to feed, feed
