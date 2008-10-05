@@ -10,7 +10,7 @@ class Main < Application
     #redirect url(:controller => 'main', :action => 'index')
     render
   end
-  def verify_login
+  def log_user_in
     @user = User.find_by_username(params[:user][:username])
     session[:user_id]=@user.id if @user && @user.password==params[:user][:password]
     session[:failed_login?]=false
@@ -18,6 +18,10 @@ class Main < Application
     session[:failed_login?]=true
     redirect url(:login)
     
+  end
+  def log_user_out
+    session[:user_id]=nil
+    redirect url(:index)
   end
     
   

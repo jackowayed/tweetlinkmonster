@@ -32,6 +32,7 @@ Merb::Router.prepare do |r|
   r.match('/feed/:username').to(:controller => 'users', :action => 'feed')
   r.match('/').to(:controller => 'main', :action => 'index').name(:index)
   r.match('/login').to(:controller => 'main', :action => 'login').name(:login)
+  r.match('/logout').to(:controller => 'main', :action => 'log_user_out').name(:logout)
   
   r.default_routes
 
