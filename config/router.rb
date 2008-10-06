@@ -30,7 +30,7 @@ Merb::Router.prepare do |r|
   # clients from calling your create or destroy actions with a GET
   r.resources :users
   #identify User => :username do
-    r.match('/feed/:username(.:format)').to(:controller => 'users', :action => 'feed').name(:feed)
+  r.match('/feed/:username(.:format)').to(:controller => 'users', :action => 'feed').name(:feed)
   #end
   r.match('/').to(:controller => 'main', :action => 'index').name(:index)
   r.match('/login').to(:controller => 'main', :action => 'login').name(:login)
