@@ -2,7 +2,7 @@
 %feed{:xmlns => "http://www.w3.org/2005/Atom"}
   %title
     ="#{@user.username}'s Tweet Link Monster Feed"
-  %link{:href => "/feed/#{@user.username}.xml", :rel => self}
+  %link{:href => "/feed/#{@user.username}.xml", :rel => "self"}
   %link{:href => "/"}
   %updated
     =Time.now
@@ -10,7 +10,7 @@
     %name
       Daniel Jackoway
   %id
-    =@user.nil?.to_s + @user.tweets.count.to_s
+    =http://www.tweetlinkmonster.com/
 
   -Tweet.all(:user_id => @user.id, :order => [:created_at.desc]).each do |tweet|
     %entry
@@ -18,7 +18,7 @@
         =tweet.title
       %link{:href => tweet.website}
       %id
-        http://www.tweetlinkmonster.com
+        ="http://www.tweetlinkmonster.com/feed/#{@user.username}"
       %updated
         =tweet.created_at
       %content
