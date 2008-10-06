@@ -110,6 +110,7 @@ UNTIL="12pm Eastern Time"
 Further customization will require that you write your own task.
 DESC
     task :disable, :roles => :web, :except => { :no_release => true } do
+      require 'rubygems'
       require 'haml'
       require 'rss/1.0'
       require 'rss/2.0'
@@ -121,7 +122,7 @@ DESC
       #tz = TZInfo::Timezone.get('America/New_York')
  
       template = File.read('./app/views/layout/maintenance.html.haml')
-      result = HAML::Template.new(template).render(binding)
+      result = Haml::Template.new(template).render(binding)
  
       put result, "#{shared_path}/system/maintenance.html", :mode => 0644
     end
