@@ -20,7 +20,7 @@
 # See merb/specs/merb/router.rb for a fairly complete usage sample.
 
 Merb.logger.info("Compiling routes...")
-Merb::Router.prepare do |r|
+Merb::Router.prepare do 
   # RESTful routes
   # r.resources :posts
 
@@ -28,15 +28,15 @@ Merb::Router.prepare do |r|
   # This is fine for most cases.  If you're heavily using resource-based
   # routes, you may want to comment/remove this line to prevent
   # clients from calling your create or destroy actions with a GET
-  r.resources :users
-  #identify User => :username do
-  r.match('/feed/:username(.:format)').to(:controller => 'users', :action => 'feed').name(:feed)
-  #end
-  r.match('/').to(:controller => 'main', :action => 'index').name(:index)
-  r.match('/login').to(:controller => 'main', :action => 'login').name(:login)
-  r.match('/logout').to(:controller => 'main', :action => 'log_user_out').name(:logout)
+  resources :users
+  identify User => :username do
+    match('/feed/:username(.:format)').to(:controller => 'users', :action => 'feed').name(:feed)
+  end
+  match('/').to(:controller => 'main', :action => 'index').name(:index)
+  match('/login').to(:controller => 'main', :action => 'login').name(:login)
+  match('/logout').to(:controller => 'main', :action => 'log_user_out').name(:logout)
   
-  r.default_routes
+  default_routes
 
   # Change this for your home page to be available at /
   # r.match('/').to(:controller => 'whatever', :action =>'index')
