@@ -3,7 +3,7 @@ class Tweet
 
   property :id, Serial
   property :user_id, Integer, :nullable => false
-  property :text, String, :nullable => false, :length => 140
+  property :text, String, :nullable => false, :length => 170
   property :created_at, DateTime, :nullable => false
   property :title, String, :length => 1000
   property :author, String

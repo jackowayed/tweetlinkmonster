@@ -16,6 +16,9 @@
     %entry
       %title
         =tweet.title
+      %author
+        %name
+          =tweet.author
       %link{:href => tweet.website}
       %id
         ="http://www.tweetlinkmonster.com/feed/#{@user.username}"
