@@ -40,7 +40,7 @@ class User
         end
       end
       tweets.each do |t|
-        tweet = Tweet.new({:user_id => self.id, :text => t.text, :created_at => t.created_at})
+        tweet = Tweet.new({:user_id => self.id, :text => t.text, :created_at => t.created_at, :author => t.user.name})
         tweet.save if t.user.screen_name != self.username && tweet.website
       end
     rescue
