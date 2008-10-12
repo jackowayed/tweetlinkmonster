@@ -25,7 +25,10 @@ class Tweet
     x.encode(x.decode(str), :decimal)
   end
   after :text= do
-    self.attribute_set(:text, html_entities_to_xml(self.text)) if self.text
+    self.attribute_set(:text, html_entities_to_xml(self.text.gsub('&amp;', '&'))) if self.text
+  end
+  after :author= do
+    self.attribute_set(:author, html_entities_to_xml(self.author.gsub('&amp;', '&'))) if self.author
   end
   after :title= do
     self.attribute_set(:title, html_entities_to_xml(self.title)) if self.title
