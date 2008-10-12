@@ -13,6 +13,17 @@ class User
 
   property :last_tweet_seen, Integer, :precision => 64
 
+  validates_with_method :validate_twitter_info
+  def validate_twitter_info
+    x = Twitter::Base.new self.username, self.password
+    begin
+      x.verify_credentials
+      true
+    rescue
+      [false, "Twitter says your username and password are wrong. Make sure you're suing your correct Twitter info and try again. If Twitter is down, you need to try again when it's up."]
+    end
+  end
+
   def get_tweets(twitter_obj, page = 1)
     Merb.logger.warn "get_tweets called"
     options = {:page => page}
