@@ -1,3 +1,4 @@
 #!/bin/sh
+
 rake dm:db:automigrate
 rake dm:db:automigrate MERB_ENV=test
