@@ -98,6 +98,41 @@ class User
     end
     str
   end
+  def meta_tweet_update
+    self.update_tweets
+    self.tweets.each do |t|
+      t.delete_if_expired
+      (t.title ||= self.find_site_title(t.website))?(t.update):(t.destroy)
+    end
+  end
+
+
+  def webpage_title(page)
+    str = /<title>.+?<\/title>/ =~ page
+    return "Title Not Found" unless str
+    $&[7...-8]
+  end
+  #from ruby-doc.org
+  def fetch(uri_str, limit = 10)
+    # You should choose better exception.
+    return "" if limit == 0
+    
+    begin
+      response = Net::HTTP.get_response(URI.parse(uri_str))
+    rescue
+      return nil
+    end
+    case response
+    when Net::HTTPSuccess     then response
+    when Net::HTTPRedirection then self.fetch(response['location'], limit - 1)
+    else
+      ""
+    end
+  end
+  def find_site_title(url)
+    return nil unless x = self.fetch(url)
+    self.webpage_title(x.body)#.gsub(/&[A-z].{2,9};/, "-")
+  end
 
   #validates_uniqueness_of :username
 

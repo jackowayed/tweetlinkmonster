@@ -61,8 +61,22 @@ Merb::BootLoader.after_app_loads do
   # Add dependencies here that must load after the application loads:
 
   # dependency "magic_admin" # this gem uses the app's model classes
+  
+  include Merb::ControllerMixin
+  thread = Thread.new do
+    while true
+      User.all.each do |user|
+        run_later do 
+          user.meta_tweet_update
+        end
+      end
+      sleep [(3600-0.1*User.all.length).to_i, 60].max
+    end
+  end
+        
+
 end
-dependencies "dm-validations", "htmlentities", "dm-ar-finders", "merb_helpers", "merb-assets", "twitter", "base64"
+dependencies "dm-validations", "htmlentities", "dm-ar-finders", "merb_helpers", "merb-assets", "twitter", "base64", "net/http"
 
 #
 # ==== Set up your ORM of choice
