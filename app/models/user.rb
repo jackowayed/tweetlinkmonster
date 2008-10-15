@@ -104,6 +104,7 @@ class User
       t.delete_if_expired
       (t.title ||= self.find_site_title(t.website))?(t.update):(t.destroy)
     end
+    true
   end
 
 

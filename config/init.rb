@@ -76,7 +76,9 @@ Merb::BootLoader.after_app_loads do
         
 
 end
-dependencies "dm-validations", "htmlentities", "dm-ar-finders", "merb_helpers", "merb-assets", "twitter", "base64", "net/http"
+dependencies "dm-validations", "htmlentities", "dm-ar-finders", "merb_helpers", "merb-assets", "twitter"
+require "base64"
+require "net/http"
 
 #
 # ==== Set up your ORM of choice
