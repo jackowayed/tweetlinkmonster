@@ -44,7 +44,7 @@ class User
       page = 1
       tweet_page = [nil]
       unless last.nil? || last == 0
-        until page==10 || tweet_page.empty? || tweets.empty?
+        until tweet_page.empty? || tweets.empty? || page==10  
           tweet_page =get_tweets(x, page+=1) 
           tweets += tweet_page
           Merb.logger.warn tweet_page.length
