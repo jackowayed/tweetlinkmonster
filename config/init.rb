@@ -79,6 +79,7 @@ end
 dependencies "dm-validations", "htmlentities", "dm-ar-finders", "merb_helpers", "merb-assets", "twitter"
 require "base64"
 require "net/http"
+require "uri"
 
 #
 # ==== Set up your ORM of choice
