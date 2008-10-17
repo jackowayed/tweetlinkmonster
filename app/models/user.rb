@@ -116,7 +116,7 @@ class User
   #from ruby-doc.org
   def fetch(uri_str, limit = 10)
     # You should choose better exception.
-    return "" if limit == 0
+    return nil if limit == 0
     
     begin
       response = Net::HTTP.get_response(self.parse(uri_str))
