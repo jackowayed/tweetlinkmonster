@@ -124,10 +124,11 @@ class User
       return nil
     end
     case response
-    when Net::HTTPSuccess     then response
-    when Net::HTTPRedirection then self.fetch(response['location'], limit - 1)
-    else
-      ""
+      when Net::HTTPSuccess     then response
+      when Net::HTTPRedirection then self.fetch(response['location'], limit - 1)
+      when Net::HTTPMovedPermanently then  self.fetch(response['location'], limit - 1)
+      else
+        nil
     end
   end
   def find_site_title(url)
