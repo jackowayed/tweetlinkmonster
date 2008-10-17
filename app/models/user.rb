@@ -1,3 +1,8 @@
+class URI
+  def parse_better(str)
+    URI.parse((/^https?:\/\//)?(str):("http://#{str}"))
+  end
+end
 class User
   include DataMapper::Resource
 
@@ -119,7 +124,7 @@ class User
     return "" if limit == 0
     
     begin
-      response = Net::HTTP.get_response(URI.parse(uri_str))
+      response = Net::HTTP.get_response(URI.parse_better(uri_str))
     rescue
       return nil
     end
@@ -138,3 +143,4 @@ class User
   #validates_uniqueness_of :username
 
 end
+

@@ -65,13 +65,13 @@ class Users < Application
   end
   def feed
     only_provides :xml
-    Merb.logger.warn("params[:username]#{params.to_s}")
+    #Merb.logger.warn("params[:username]#{params.to_s}")
     raise NotFound unless @user = User.find_by_username(params[:username]) 
-    @user.update_tweets
-    @user.tweets.each do |t|
-      t.delete_if_expired
-      (t.title ||= find_site_title(t.website))?(t.update):(t.destroy)
-    end
+    #@user.update_tweets
+    #@user.tweets.each do |t|
+    #  t.delete_if_expired
+    #  (t.title ||= find_site_title(t.website))?(t.update):(t.destroy)
+    #end
     render
     
   end
