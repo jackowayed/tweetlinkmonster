@@ -101,7 +101,7 @@ class User
   def meta_tweet_update
     self.update_tweets
     self.tweets.each do |t|
-      next if t.delete_if_expired
+      t.delete_if_expired
       (t.title ||= self.find_site_title(t.website))?(t.update):(t.destroy)
     end
     true
