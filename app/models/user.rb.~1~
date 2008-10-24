@@ -1,4 +1,4 @@
- class User
+class User
   include DataMapper::Resource
 
   has n, :tweets
@@ -44,8 +44,8 @@
       page = 1
       tweet_page = [nil]
       unless last.nil? || last == 0
-        until tweet_page.empty? || tweets.empty? || page==10
-          tweet_page =get_tweets(x, page+=1)
+        until tweet_page.empty? || tweets.empty? || page==10  
+          tweet_page =get_tweets(x, page+=1) 
           tweets += tweet_page
           Merb.logger.warn tweet_page.length
         end
@@ -93,7 +93,7 @@
       x<<c
     }
     str=""
-    ((rand*3+9).to_i).times do
+    ((rand*3+9).to_i).times do 
       str<<x[(rand*x.length).to_i]
     end
     str
@@ -117,7 +117,7 @@
   def fetch(uri_str, limit = 10)
     # You should choose better exception.
     return nil if limit == 0
-
+    
     begin
       response = Net::HTTP.get_response(self.parse(uri_str))
     rescue

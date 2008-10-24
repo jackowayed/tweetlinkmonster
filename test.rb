@@ -1,6 +1,8 @@
 require 'rubygems'
 require 'twitter'
 
+
+
 def func
   raise Twitter::CantConnect
 end
