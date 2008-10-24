@@ -15,7 +15,7 @@
   -Tweet.all(:user_id => @user.id, :order => [:created_at.desc]).each do |tweet|
     %entry
       %title
-        =tweet.title
+        =tweet.title||"Title Not Found"
       %author
         %name
           =tweet.author
