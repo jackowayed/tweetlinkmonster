@@ -127,9 +127,13 @@ class User
       when Net::HTTPSuccess     then response
       when Net::HTTPRedirection then self.fetch(response['location'], limit - 1)
       when Net::HTTPMovedPermanently then  self.fetch(response['location'], limit - 1)
+      when Net::HTTPFound then fetch_again
       else
         nil
     end
+  end
+  def fetch_again(response)
+    self.fetch(response['location'], limit - 1)
   end
   def find_site_title(url)
     return nil unless x = self.fetch(url)

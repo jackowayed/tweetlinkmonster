@@ -14,7 +14,7 @@ set :use_sudo, false
 
 # If you aren't using Subversion to manage your source code, specify
 # your SCM below:
-#default_run_options[:pty] = true
+default_run_options[:pty] = true
 
 set :user, "tlm"
 #set :git_user, "danieljdel"
@@ -22,8 +22,8 @@ set :user, "tlm"
 set :scm, :git
 set :branch, "master"
 set :scm_user, "danieljdel"
-set :deploy_via, :remote_cache
-#set :deploy_via, :copy
+#set :deploy_via, :remote_cache
+set :deploy_via, :copy
 set :copy_strategy, :export
 set :repository_cache, "git_master"
 set :remote, "#{scm_user}"
