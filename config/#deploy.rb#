@@ -56,7 +56,6 @@ namespace :deploy do
 ic ./public_html"
   run "skill -9 -u #{user} -c merb.fcgi"
   end
-
   desc "Migrate the database"
   task :migrate do
     run "cd #{current_release}; ~/lib/ruby/gems/1.8/gems/rake-0.8.3/bin/rake dm:db:automigrate MERB_ENV=production"
