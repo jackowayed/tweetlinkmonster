@@ -23,7 +23,7 @@ set :user, "tlm"
 
 set :scm, :git
 set :branch, "master"
-set :scm_user, "danieljdel"
+set :scm_user, "jackowayed"
 set :deploy_via, :remote_cache
 set :repository_cache, "git_master"
 set :remote, "#{scm_user}"
@@ -39,12 +39,12 @@ namespace :deploy do
   #task :start do
     #run "merb -a #{adapter} -e production -c #{processes} --port #{start_port} -m #{current_path} -l #{log_level} -L #{log_path}"
   #end
- 
+
   #desc "Stop Merb Instances"
   #task :stop do
     #run "cd #{current_path} && merb -a #{adapter} -k all"
   #end
- 
+
   #desc 'Custom restart task for Merb'
   #task :restart, :roles => :app do
     #deploy.stop
@@ -85,7 +85,7 @@ ic ./public_html"
     sleep 10
     deploy.web.enable
   end
-  
+
   desc "Sneak in a really quick deployment"
   task :sneak do
     transaction do
@@ -103,15 +103,15 @@ Present a maintenance page to visitors. Disables your application's web \
 interface by writing a "maintenance.html" file to each web server. The \
 servers must be configured to detect the presence of this file, and if \
 it is present, always display it instead of performing the request.
- 
+
 By default, the maintenance page will just say the site is down for \
 "maintenance", and will be back "shortly", but you can customize the \
 page by specifying the REASON and UNTIL environment variables:
- 
+
 $ cap deploy:web:disable \\
 REASON="hardware upgrade" \\
 UNTIL="12pm Eastern Time"
- 
+
 Further customization will require that you write your own task.
 DESC
     task :disable, :roles => :web, :except => { :no_release => true } do
@@ -120,19 +120,19 @@ DESC
       require 'rss/1.0'
       require 'rss/2.0'
       on_rollback { run "rm #{shared_path}/system/maintenance.html" }
- 
+
       started = ENV['STARTED']
       reason = ENV['REASON']
       deadline = ENV['UNTIL']
       #tz = TZInfo::Timezone.get('America/New_York')
- 
+
       template = File.read('./app/views/layout/maintenance.html.haml')
       result = Haml::Template.new(template).render(binding)
- 
+
       put result, "#{shared_path}/system/maintenance.html", :mode => 0644
     end
   end
-  
+
   after deploy.symlink do
     run "chmod g-w -R ~/apps/tweetlinkmonster/"
   end
@@ -145,16 +145,16 @@ namespace :logs do
     run "cd #{current_path} && tail -f #{log_path}"
   end
 end
- 
+
 namespace :monit do
   desc "Get monit status"
   task :status do
     run "sudo /usr/sbin/monit status"
   end
- 
+
   desc "Get monit summary"
   task :summary do
     run "sudo /usr/sbin/monit summary"
   end
 end
- 
+
