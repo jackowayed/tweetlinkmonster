@@ -113,23 +113,30 @@ class User
     return "Title Not Found" unless str
     $&[7...-8]
   end
-  #from ruby-doc.org
+
+  #from ruby-doc.org adapted by Michael
   def fetch(uri_str, limit = 10)
     # You should choose better exception.
     return nil if limit == 0
 
     begin
-      response = Net::HTTP.get_response(self.parse(uri_str))
+      url = self.parse(uri_str)
+      req = Net::HTTP::Get.new(url.path)
+      #req.content_length=20
+      req.range = (0..2000)
+      response = Net::HTTP.new(url.host, url.port).start {|http| http.request(req) }
+      Merb.logger.warn(response.to_s)
     rescue
-      return nil
+      return $!
     end
+    return response
     case response
       when Net::HTTPSuccess     then response
       when Net::HTTPRedirection then self.fetch(response['location'], limit - 1)
       when Net::HTTPMovedPermanently then  self.fetch(response['location'], limit - 1)
       when Net::HTTPFound then fetch_again response
       else
-        nil
+        raise ArgumentError
     end
   end
   def fetch_again(response)
@@ -140,6 +147,7 @@ class User
     self.webpage_title(x.body)#.gsub(/&[A-z].{2,9};/, "-")
   end
   def parse(str)
+    str+='/' unless str[11] && /\// =~str[11..-1]
     URI.parse((/^https?:\/\//=~str)?(str):("http://#{str}"))
   end
 

@@ -3,6 +3,7 @@ class Merb::Request
     @env['REDIRECT_URL'] || @env['REQUEST_PATH'] || @env['REQUEST_URI'] || path_info
   end
 end
+
 #
 # ==== Structure of Merb initializer
 #
@@ -80,6 +81,8 @@ dependencies "dm-validations", "htmlentities", "dm-ar-finders", "merb_helpers", 
 require "base64"
 require "net/http"
 require "uri"
+
+
 
 #
 # ==== Set up your ORM of choice
