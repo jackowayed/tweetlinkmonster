@@ -124,7 +124,7 @@ class User
       req = Net::HTTP::Get.new(url.path)
       #req.content_length=20
       req.range = (0..2000)
-      response = Net::HTTP.new(url.host, url.port).start {|http| http.request(req) }
+      response = Net::HTTP.new(url.host, url.port).start {|http| http.request(req) } rescue Timeout::Error return false
       Merb.logger.warn(response.to_s)
     rescue
       return false
