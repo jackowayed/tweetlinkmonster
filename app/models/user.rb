@@ -127,7 +127,7 @@ class User
       response = Net::HTTP.new(url.host, url.port).start {|http| http.request(req) }
       Merb.logger.warn(response.to_s)
     rescue
-      return $!
+      return false
     end
     return response
     case response
@@ -137,14 +137,15 @@ class User
       when Net::HTTPMovedPermanently then  self.fetch(response['location'], limit - 1)
       when Net::HTTPFound then fetch_again response
       else
-        raise ArgumentError
+        return nil
     end
   end
   def fetch_again(response)
     self.fetch(response['location'], limit - 1)
   end
   def find_site_title(url)
-    return nil unless x = self.fetch(url)
+    return nil unless x = self.fetch(url).nil?
+    return "Title not found" if x==false
     self.webpage_title(x.body)#.gsub(/&[A-z].{2,9};/, "-")
   end
   def parse(str)
