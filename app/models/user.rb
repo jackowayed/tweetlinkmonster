@@ -132,6 +132,7 @@ class User
     return response
     case response
       when Net::HTTPSuccess     then response
+      when Net::HTTPParticalContent then response
       when Net::HTTPRedirection then self.fetch(response['location'], limit - 1)
       when Net::HTTPMovedPermanently then  self.fetch(response['location'], limit - 1)
       when Net::HTTPFound then fetch_again response
