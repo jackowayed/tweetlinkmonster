@@ -140,6 +140,7 @@ class User
     return response
     case response
       when Net::HTTPSuccess     then response
+      when Net::HTTPOK          then response
       when Net::HTTPParticalContent then response
       when Net::HTTPRedirection then self.fetch(response['location'], limit - 1)
       when Net::HTTPMovedPermanently then  self.fetch(response['location'], limit - 1)
@@ -152,7 +153,8 @@ class User
     self.fetch(response['location'], limit - 1)
   end
   def find_site_title(url)
-    return nil unless x = self.fetch(url).nil?
+    x = self.fetch(url)
+    return nil if self.fetch(url).nil?
     return "Title not found" if x==false
     self.webpage_title(x.body)#.gsub(/&[A-z].{2,9};/, "-")
   end
