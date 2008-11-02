@@ -102,7 +102,13 @@ class User
     self.update_tweets
     self.tweets.each do |t|
       next if t.delete_if_expired
-      (t.title ||= self.find_site_title(t.website))?(t.update):(t.destroy)
+      begin
+        (t.title ||= self.find_site_title(t.website))?(t.update):(t.destroy)
+      rescue Timeout::Error
+        t.title||="Title Not Found"
+        t.update rescue t.delete rescue next
+        next
+      end
     end
     true
   end
