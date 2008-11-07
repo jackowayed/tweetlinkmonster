@@ -137,21 +137,19 @@ class User
     rescue
       return false
     end
-    return response
+    #return response
     case response
       when Net::HTTPSuccess     then response
       when Net::HTTPOK          then response
-      when Net::HTTPParticalContent then response
+      when Net::HTTPPartialContent then response
       when Net::HTTPRedirection then self.fetch(response['location'], limit - 1)
       when Net::HTTPMovedPermanently then  self.fetch(response['location'], limit - 1)
-      when Net::HTTPFound then fetch_again response
+      when Net::HTTPFound then self.fetch(response['location'], limit-1)
       else
         return nil
     end
   end
-  def fetch_again(response)
-    self.fetch(response['location'], limit - 1)
-  end
+
   def find_site_title(url)
     x = self.fetch(url)
     return nil if self.fetch(url).nil?
