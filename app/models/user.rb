@@ -115,7 +115,7 @@ class User
 
 
   def webpage_title(page)
-    str = /<title>.+<\/title>/ =~ page
+    Merb.logger.warn("couldn't find the title") unless str = /<title>.+<\/title>/ =~ page
     return "Title Not Found" unless str
     $&[7...-8]
   end
@@ -132,7 +132,12 @@ class User
       req.range = (0..2000)
       response = Net::HTTP.new(url.host, url.port).start {|http| http.request(req) } 
       Merb.logger.warn(response.to_s)
+#      return response
     rescue Timeout::Error
+      Merb.logger.warn($!)
+      return false
+    rescue
+      Merb.logger.warn($!)
       return false
     end
     #return response
@@ -143,8 +148,9 @@ class User
       when Net::HTTPRedirection then self.fetch(response['location'], limit - 1)
       when Net::HTTPMovedPermanently then  self.fetch(response['location'], limit - 1)
       when Net::HTTPFound then self.fetch(response['location'], limit-1)
-      else
-        return nil
+    else
+      Merb.logger.warn("some weird response")
+      return nil
     end
   end
 
@@ -158,7 +164,9 @@ class User
     str+='/' unless str[11] && /\// =~str[11..-1]
     URI.parse((/^https?:\/\//=~str)?(str):("http://#{str}"))
   end
-
+  def log(str)
+    Merb.logger.warn(str.to_s)
+  end
 
   #validates_uniqueness_of :username
 
