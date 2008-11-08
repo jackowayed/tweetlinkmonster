@@ -102,13 +102,13 @@ class User
     self.update_tweets
     self.tweets.each do |t|
       next if t.delete_if_expired
-      begin
-        (t.title ||= self.find_site_title(t.website))?(t.update):(t.destroy)
-      rescue Timeout::Error
-        t.title||="Title Not Found"
-        t.update rescue t.delete rescue next
-        next
-      end
+      #begin
+      (t.title ||= self.find_site_title(t.website))?(t.update):(t.destroy)
+      #rescue Timeout::Error
+#         t.title||="Title Not Found"
+#         t.update rescue t.delete rescue next
+#         next
+#       end
     end
     true
   end
@@ -134,8 +134,6 @@ class User
       Merb.logger.warn(response.to_s)
     rescue Timeout::Error
       return false
-    rescue
-      return false
     end
     #return response
     case response
@@ -152,7 +150,7 @@ class User
 
   def find_site_title(url)
     x = self.fetch(url)
-    return nil if self.fetch(url).nil?
+    return nil if x.nil?
     return "Title not found" if x==false
     self.webpage_title(x.body)#.gsub(/&[A-z].{2,9};/, "-")
   end
