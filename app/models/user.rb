@@ -103,7 +103,7 @@ class User
     self.tweets.each do |t|
       next if t.delete_if_expired
       #begin
-      (t.title ||= self.find_site_title(t.website))?(t.update):(t.destroy)
+      (t.title ||= self.find_site_title(t.website))?(t.update):(self.log("got a nil title somehow"))
       #rescue Timeout::Error
 #         t.title||="Title Not Found"
 #         t.update rescue t.delete rescue next
@@ -113,57 +113,78 @@ class User
     true
   end
 
-
-  def webpage_title(page)
-    Merb.logger.warn("couldn't find the title") unless str = /<title>.+<\/title>/ =~ page
-    return "Title Not Found" unless str
-    $&[7...-8]
-  end
-
-  #from ruby-doc.org adapted by Michael
-  def fetch(uri_str, limit = 10)
-    # You should choose better exception.
-    return nil if limit == 0
-
-    begin
-      url = self.parse(uri_str)
-      req = Net::HTTP::Get.new(url.path)
-      #req.content_length=20
-      req.range = (0..2000)
-      response = Net::HTTP.new(url.host, url.port).start {|http| http.request(req) } 
-      Merb.logger.warn(response.to_s)
-#      return response
-    rescue Timeout::Error
-      Merb.logger.warn($!)
-      return false
-    rescue
-      Merb.logger.warn($!)
-      return false
-    end
-    #return response
-    case response
-      when Net::HTTPSuccess     then response
-      when Net::HTTPOK          then response
-      when Net::HTTPPartialContent then response
-      when Net::HTTPRedirection then self.fetch(response['location'], limit - 1)
-      when Net::HTTPMovedPermanently then  self.fetch(response['location'], limit - 1)
-      when Net::HTTPFound then self.fetch(response['location'], limit-1)
-    else
-      Merb.logger.warn("some weird response")
-      return nil
-    end
-  end
-
   def find_site_title(url)
-    x = self.fetch(url)
-    return nil if x.nil?
-    return "Title not found" if x==false
-    self.webpage_title(x.body)#.gsub(/&[A-z].{2,9};/, "-")
+    uri=uri_ify(url)
+    doc= nil 
+    title = nil
+    begin
+      timeout(5) do
+        doc = Hpricot(open(uri))
+      end
+    rescue Timeout::Error
+      self.log("timeout")
+      title = "Title Not Found"
+    end
+    return title if title
+    title = (doc/"title").innerHTML
+    return (title=="")?("Title Not Found"):(title)
   end
-  def parse(str)
-    str+='/' unless str[11] && /\// =~str[11..-1]
-    URI.parse((/^https?:\/\//=~str)?(str):("http://#{str}"))
+      
+  def uri_ify(str)
+    str=((/https?:\/\//=~str)||(/ftp:\/\//=~str))?(str):("http://#{str}")
+    str+='/' unless str[10] && /\// =~str[10..-1]
+    str
   end
+#   def webpage_title(page)
+#     Merb.logger.warn("couldn't find the title") unless str = /<title>.+<\/title>/ =~ page
+#     return "Title Not Found" unless str
+#     $&[7...-8]
+#   end
+
+#   #from ruby-doc.org adapted by Michael
+#   def fetch(uri_str, limit = 10)
+#     # You should choose better exception.
+#     return nil if limit == 0
+
+#     begin
+#       url = self.parse(uri_str)
+#       req = Net::HTTP::Get.new(url.path)
+#       #req.content_length=20
+#       req.range = (0..2000)
+#       response = Net::HTTP.new(url.host, url.port).start {|http| http.request(req) } 
+#       Merb.logger.warn(response.to_s)
+# #      return response
+#     rescue Timeout::Error
+#       Merb.logger.warn($!)
+#       return false
+#     rescue
+#       Merb.logger.warn($!)
+#       return false
+#     end
+#     #return response
+#     case response
+#       when Net::HTTPSuccess     then response
+#       when Net::HTTPOK          then response
+#       when Net::HTTPPartialContent then response
+#       when Net::HTTPRedirection then self.fetch(response['location'], limit - 1)
+#       when Net::HTTPMovedPermanently then  self.fetch(response['location'], limit - 1)
+#       when Net::HTTPFound then self.fetch(response['location'], limit-1)
+#     else
+#       Merb.logger.warn("some weird response")
+#       return nil
+#     end
+#   end
+
+#   def find_site_title(url)
+#     x = self.fetch(url)
+#     return nil if x.nil?
+#     return "Title not found" if x==false
+#     self.webpage_title(x.body)#.gsub(/&[A-z].{2,9};/, "-")
+#   end
+#   def parse(str)
+#     str+='/' unless str[11] && /\// =~str[11..-1]
+#     URI.parse((/^https?:\/\//=~str)?(str):("http://#{str}"))
+#   end
   def log(str)
     Merb.logger.warn(str.to_s)
   end
