@@ -112,22 +112,30 @@ class User
     end
     true
   end
+ def webpage_title(page)
 
-  def find_site_title(url)
-    uri=uri_ify(url)
+ Merb.logger.warn("couldn't find the title") unless str = /<title>.+<\/title>/ =~ page
+
+ return "Title Not Found" unless str
+
+ $&[7...-8]
+
+ end
+  def find_site_title(uri)
+    uri=uri_ify(uri)
     doc= nil 
     title = nil
     begin
-      timeout(5) do
-        doc = Hpricot(open(uri))
+      timeout(3) do
+        doc = open(uri)
       end
     rescue Timeout::Error
       self.log("timeout")
       title = "Title Not Found"
     end
     return title if title
-    title = (doc/"title").innerHTML
-    return (title=="")?("Title Not Found"):(title)
+    str = /<title>.+<\/title>/ =~ page
+    return (str)?($&[7...-8]):("Title Not Found")
   end
       
   def uri_ify(str)
