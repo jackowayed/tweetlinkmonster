@@ -134,7 +134,7 @@ class User
       title = "Title Not Found"
     end
     return title if title
-    str = /<title>.+<\/title>/ =~ page
+    str = /<title>.+<\/title>/ =~ doc
     return (str)?($&[7...-8]):("Title Not Found")
   end
       
