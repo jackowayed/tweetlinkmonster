@@ -118,25 +118,28 @@ class User
 
    return "Title Not Found" unless str
 
- $&[7...-8]
+   $&[7...-8]
 
  end
-  def find_site_title(uri)
-    uri=uri_ify(uri)
-    doc= nil 
-    title = nil
-    begin
-      timeout(3) do
-        doc = open(uri)
-      end
-    rescue Timeout::Error
-      self.log("timeout")
-      title = "Title Not Found"
-    end
-    return title if title
-    puts doc.class
-    str = /<title>.+<\/title>/ =~ doc.read
-    return (str)?($&[7...-8]):("Title Not Found")
+ def find_site_title(uri)
+   uri=uri_ify(uri)
+   doc= nil 
+   title = nil
+   begin
+     timeout(3) do
+       doc = open(uri)
+     end
+   rescue Timeout::Error
+     self.log("timeout")
+     title = "Title Not Found"
+   rescue
+     self.log($!)
+     title = "Title Not Found"
+   end
+   return title if title
+   puts doc.class
+   str = /<title>.+<\/title>/ =~ doc.read
+   return (str)?($&[7...-8]):("Title Not Found")
   end
       
   def uri_ify(str)
