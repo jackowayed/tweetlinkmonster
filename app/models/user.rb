@@ -127,7 +127,7 @@ class User
     title = nil
     begin
       timeout(3) do
-        doc = open(uri)
+        doc = open(uri).read
       end
     rescue Timeout::Error
       self.log("timeout")
