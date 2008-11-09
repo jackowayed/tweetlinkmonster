@@ -127,14 +127,15 @@ class User
     title = nil
     begin
       timeout(3) do
-        doc = open(uri).read
+        doc = open(uri)
       end
     rescue Timeout::Error
       self.log("timeout")
       title = "Title Not Found"
     end
     return title if title
-    str = /<title>.+<\/title>/ =~ doc
+    puts doc.class
+    str = /<title>.+<\/title>/ =~ doc.read
     return (str)?($&[7...-8]):("Title Not Found")
   end
       
