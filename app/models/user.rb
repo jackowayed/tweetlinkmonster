@@ -114,9 +114,9 @@ class User
   end
  def webpage_title(page)
 
- Merb.logger.warn("couldn't find the title") unless str = /<title>.+<\/title>/ =~ page
+   Merb.logger.warn("couldn't find the title") unless str = /<title>.+<\/title>/ =~ page
 
- return "Title Not Found" unless str
+   return "Title Not Found" unless str
 
  $&[7...-8]
 
