@@ -63,6 +63,7 @@ Merb::BootLoader.after_app_loads do
 
   # dependency "magic_admin" # this gem uses the app's model classes
   
+
   Merb.logger.fatal("started after_app_loads")
   include Merb::ControllerMixin
   thread = Thread.new do
