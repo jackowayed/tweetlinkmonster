@@ -63,13 +63,15 @@ Merb::BootLoader.after_app_loads do
 
   # dependency "magic_admin" # this gem uses the app's model classes
   
+  Merb.logger.fatal("started after_app_loads")
   include Merb::ControllerMixin
   thread = Thread.new do
+    Merb.logger.fatal("started thread")
     while true
       User.all.each do |user|
         run_later do 
           user.meta_tweet_update
-          Merb.logger.warn(user.username + "updated")
+          Merb.logger.error(user.username + "updated")
         end
       end
       sleep [(3600-5*User.all.length).to_i, 60].max
