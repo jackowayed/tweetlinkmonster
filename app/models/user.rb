@@ -151,7 +151,7 @@ class User
     str
   end
   def log(str)
-    Merb.logger.warn(str.to_s)
+    Merb.logger.error(str.to_s)
   end
 
 
