@@ -1,4 +1,9 @@
 #!/usr/bin/env ruby
 require 'rubygems'
 require 'twitter'
-puts Twitter::Base.new('tweetlinkmonstr', 'getmetweetlinks!').update(gets)
+x = gets
+if x.length>140
+  puts "That was #{x.length} characters long"
+else
+  puts Twitter::Base.new('tweetlinkmonstr', 'getmetweetlinks!').update(x)
+end

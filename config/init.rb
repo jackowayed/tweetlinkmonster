@@ -69,11 +69,13 @@ Merb::BootLoader.after_app_loads do
       User.all.each do |user|
         run_later do 
           user.meta_tweet_update
+          Merb.logger.warn(user.username + "updated")
         end
       end
-      sleep [(3600-0.1*User.all.length).to_i, 60].max
+      sleep [(3600-5*User.all.length).to_i, 60].max
     end
   end
+#  thread.start
         
 
 end

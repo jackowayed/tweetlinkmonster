@@ -1,9 +1,10 @@
 class User
+
   include DataMapper::Resource
 
   has n, :tweets
 
-  property :username, String, :nullable => false, :unique => true
+  property :username, String, :nullable => false, :unique => true, :format => /\w+/
 
   property :id, Integer, :serial => true, :nullabe => false
 
@@ -20,9 +21,11 @@ class User
       x.verify_credentials
       true
     rescue
-      [false, "Twitter says your username and password are wrong. Make sure you're suing your correct Twitter info and try again. If Twitter is down, you need to try again when it's up."]
+      [false, "Twitter says your username and password are wrong. Make sure you're using your correct Twitter info and try again. If Twitter is down, you need to try again when it's up."]
     end
   end
+
+
 
   def get_tweets(twitter_obj, page = 1)
     Merb.logger.warn "get_tweets called"
