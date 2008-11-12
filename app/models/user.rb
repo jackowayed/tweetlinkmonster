@@ -130,7 +130,7 @@ class User
    doc= nil 
    title = nil
    begin
-     timeout(3) do
+     timeout(10) do
        doc = open(uri)
      end
    rescue Timeout::Error
