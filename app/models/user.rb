@@ -66,7 +66,8 @@ class User
   end
   def expire_tweets
     self.tweets.each do |t|
-      t.delete_if_expired end
+      t.delete_if_expired 
+    end
   end
   def password
     crypt = User.crypt_obj
