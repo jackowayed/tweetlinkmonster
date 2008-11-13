@@ -53,8 +53,9 @@ class User
           Merb.logger.warn tweet_page.length
         end
       end
-      tweets.each do |t|
-        tweet = Tweet.new({:user_id => self.id, :text => t.text, :created_at => t.created_at, :author => t.user.name})
+      tweets.reverse.each do |t|
+        next unless t.user.screen_name != self.username && tweet.website
+        tweet = Tweet.new({:user_id => self.id, :text => t.text, :created_at => t.created_at, :author => t.user.name, :title => self.find_site_title(t.website)})
         tweet.save if t.user.screen_name != self.username && tweet.website
       end
     rescue
