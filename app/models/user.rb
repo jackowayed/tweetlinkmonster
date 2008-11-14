@@ -55,14 +55,16 @@ class User
       end
       tweets.reverse.each do |t|
         next unless t.user.screen_name != self.username && tweet.website
-        tweet = Tweet.new({:user_id => self.id, :text => t.text, :created_at => t.created_at, :author => t.user.name, :title => self.find_site_title(t.website)})
+        title = self.find_site_title(t.website)
+        tweet = Tweet.new({:user_id => self.id, :text => t.text, :created_at => t.created_at, :author => t.user.name, :title => title})
         tweet.save if t.user.screen_name != self.username && tweet.website
       end
     rescue
       Merb.logger.error("Exception #{$!} occurred")
-      puts $!
+      puts "#{$!} from the tweet-construction loop"
       return false
     end
+    
     return true
   end
   def expire_tweets

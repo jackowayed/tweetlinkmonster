@@ -1,3 +1,3 @@
 User.all.each do |u|
-  u.meta_tweet_update
+  u.update_tweets
 end
