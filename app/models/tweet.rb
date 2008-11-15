@@ -12,7 +12,10 @@ class Tweet
     self.destroy if (Time.now - 1.week) > self.created_at 
   end
   def website
-    /(http:\/\/|www\.)\S+\.[A-z]{3}\S*/ =~ self.text
+    Tweet.find_website(self.text)
+  end
+  def self.find_website(str)
+    /(http:\/\/|www\.)\S+\.[A-z]{3}\S*/ =~ str
     return nil if $&.nil?
     x = $&
     #x = x[0...-1] while /[\.\)\]!\?]/ =~ x[-1].chr
