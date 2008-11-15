@@ -45,7 +45,7 @@ class User
       #Merb.logger.warn tweets[0].object_id
       #Merb.logger.warn tweets[0].id
       page = 1
-      tweet_page = [nil]
+      tweet_page = []
       unless last.nil? || last == 0
         until tweet_page.empty? || tweets.empty? || page==10
           tweet_page =get_tweets(x, page+=1)
