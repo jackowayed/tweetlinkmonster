@@ -3,6 +3,7 @@ class Main < Application
   # ...and remember, everything returned from an action
   # goes to the client...
   def index
+   #raise NotFound
     render
   end
   def login
