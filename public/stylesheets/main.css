@@ -8,3 +8,9 @@
   #header #links a:hover {
     color: #3333bb;
     background-color: #fff; }
+
+#message {
+  width: 100%;
+  background-color: #ff0;
+  padding: 1em;
+  border: all; }

@@ -4,6 +4,7 @@ class Main < Application
   # goes to the client...
   def index
    #raise NotFound
+#    @_message = "hello world!"
     render
   end
   def login
