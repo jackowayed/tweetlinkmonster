@@ -8,5 +8,11 @@
     -#%link{:rel=>"stylesheet", :href=>"/stylesheets/master.css", :type=>"text/css", :media=>"screen", :charset=>"utf-8"}
     = css_include_tag "main"
   %body
+    
+    
+    #header
+      #links
+        = link_to "Home", url(:index)
+        = link_to "Login", url(:login)
     = catch_content :for_layout
   

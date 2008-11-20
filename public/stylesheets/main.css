@@ -1,0 +1,10 @@
+#header {
+  background-color: #3333bb; }
+  #header #links a {
+    text-decoration: none;
+    width: 200px;
+    color: #fff;
+    background-color: #3333bb; }
+  #header #links a:hover {
+    color: #3333bb;
+    background-color: #fff; }
