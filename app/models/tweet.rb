@@ -15,7 +15,7 @@ class Tweet
     Tweet.find_website(self.text)
   end
   def self.find_website(str)
-    /(http:\/\/|www\.)\S+\.[A-z]{3}\S*/ =~ str
+    /(http:\/\/|www\.)\S+\.[A-z]{2,3}\S*/ =~ str
     return nil if $&.nil?
     x = $&
     #x = x[0...-1] while /[\.\)\]!\?]/ =~ x[-1].chr
