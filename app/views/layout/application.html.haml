@@ -8,14 +8,23 @@
     -#%link{:rel=>"stylesheet", :href=>"/stylesheets/master.css", :type=>"text/css", :media=>"screen", :charset=>"utf-8"}
     = css_include_tag "main"
   %body
+    #body
 
     
-    #header
-      #links
-        = link_to "Home", url(:index)
-        = link_to "Login", url(:login)
-    %p
-      #message
-        &= message
-    = catch_content :for_layout
+      #header
+        #links
+          = link_to "Home", url(:index)
+          = link_to "Login", url(:login)
+          
+      .sidebar
+        #right
+          Hello world!
+          -#= image_tag 'support_ivey.gif'
+        
+      #main
+        %p
+          #message
+            &= message
+        = catch_content :for_layout
+
   

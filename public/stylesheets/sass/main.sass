@@ -1,9 +1,22 @@
 //constants
 //!dark = #228B22
-!dark = #264a05
+!dark = #006400 
+//#264a05
 !accent = #9aff24
 !light = #fff
 !text_color = #000
+
+a
+  :color = !dark
+  &:hover
+    :color = !accent
+    :background = !dark
+
+
+
+#body
+  :width 90%
+
 #header
   :background-color = !dark
   :padding .25em
@@ -29,4 +42,13 @@
   :font-color = !text_color
   :margin auto
 
-  
+.sidebar
+  :width 200px
+  :padding 1em
+  :float right
+#main
+  :margin-right 230px
+  :border-right solid
+  :border-color #aaa
+  :boder-width 1px
+  :padding-right 1em
