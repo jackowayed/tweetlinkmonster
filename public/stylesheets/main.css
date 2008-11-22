@@ -1,21 +1,23 @@
 #header {
-  background-color: #3333bb; }
+  background-color: #264a05;
+  padding: .25em; }
   #header #links a {
     text-decoration: none;
-    width: 200px;
-    color: #fff;
-    background-color: #3333bb; }
-  #header #links a:hover {
-    color: #3333bb;
-    background-color: #fff; }
+    width: 250px;
+    color: #ffffff;
+    background-color: #264a05;
+    padding: 0em .5em; }
+    #header #links a:hover {
+      color: #264a05;
+      background-color: #ffffff; }
 
 #message {
   left: 50px;
   width: 80%;
-  background-color: #f70;
+  background-color: #9aff24;
   padding: .5em;
   border-width: 1px;
   border-style: solid;
-  border-color: #f00;
-  font-color: #0f0;
+  border-color: #264a05;
+  font-color: #000000;
   margin: auto; }

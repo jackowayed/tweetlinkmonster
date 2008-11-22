@@ -1,25 +1,32 @@
-!dark = #33b
+//constants
+//!dark = #228B22
+!dark = #264a05
+!accent = #9aff24
+!light = #fff
+!text_color = #000
 #header
   :background-color = !dark
+  :padding .25em
   #links
     a
       :text-decoration none
-      :width 200px
-      :color #fff
+      :width 250px
+      :color = !light
       :background-color = !dark
-    a:hover
-      :color = !dark
-      :background-color #fff
+      :padding 0em .5em
+      &:hover
+        :color = !dark
+        :background-color = !light
 #message
   :left 50px
   // :right 10%
   :width 80%
-  :background-color #f70
+  :background-color = !accent
   :padding .5em
   :border-width 1px
   :border-style solid
-  :border-color #f00
-  :font-color #0f0
+  :border-color = !dark
+  :font-color = !text_color
   :margin auto
 
   
