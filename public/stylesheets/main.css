@@ -4,12 +4,20 @@ a {
     color: #9aff24;
     background: #006400; }
 
+
+#banner {
+  margin: auto;
+  width: 750px; }
+
 #body {
-  width: 90%; }
+  width: 750px;
+  margin: auto;
+  background-color: #fff; }
 
 #header {
   background-color: #006400;
-  padding: .25em; }
+  padding: .25em;
+  padding-bottom: 0; }
   #header #links a {
     text-decoration: none;
     width: 250px;
@@ -39,6 +47,8 @@ a {
 #main {
   margin-right: 230px;
   border-right: solid;
-  border-color: #aaa;
+  border-color: #006400;
   boder-width: 1px;
-  padding-right: 1em; }
+  padding-right: 1em;
+  margin-top: 0;
+  padding-top: 0; }

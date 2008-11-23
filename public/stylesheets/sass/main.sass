@@ -5,6 +5,7 @@
 !accent = #9aff24
 !light = #fff
 !text_color = #000
+!width = 750px
 
 a
   :color = !dark
@@ -12,14 +13,20 @@ a
     :color = !accent
     :background = !dark
 
+body
+  //:background-color = !dark
 
-
+#banner
+  :margin auto
+  :width = !width 
 #body
-  :width 90%
-
+  :width = !width 
+  :margin auto
+  :background-color #fff
 #header
   :background-color = !dark
   :padding .25em
+  :padding-bottom 0
   #links
     a
       :text-decoration none
@@ -49,6 +56,8 @@ a
 #main
   :margin-right 230px
   :border-right solid
-  :border-color #aaa
+  :border-color = !dark
   :boder-width 1px
   :padding-right 1em
+  :margin-top 0
+  :padding-top 0

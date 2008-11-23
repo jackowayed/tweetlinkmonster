@@ -8,6 +8,8 @@
     -#%link{:rel=>"stylesheet", :href=>"/stylesheets/master.css", :type=>"text/css", :media=>"screen", :charset=>"utf-8"}
     = css_include_tag "main"
   %body
+    #banner
+      = image_tag 'banner.png'
     #body
 
     
@@ -18,8 +20,9 @@
           
       .sidebar
         #right
-          Hello world!
-          -#= image_tag 'support_ivey.gif'
+          
+
+          = link_to image_tag('sponsor_ivey.gif'), "http://iveyandbrown.com?tlm"
         
       #main
         %p
