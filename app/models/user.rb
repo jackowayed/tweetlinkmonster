@@ -157,7 +157,14 @@ class User
   def log(str)
     Merb.logger.error(str.to_s)
   end
-
+  def self.authenticate(username, pass)
+    if user = User.find_by_username(username)
+      user.password==pass
+    else
+      false
+    end
+  end
+    
 
 
 end

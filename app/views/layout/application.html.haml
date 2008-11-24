@@ -5,7 +5,7 @@
     %title
       Tweet Link Monster
     %meta{'http-equiv'=>"content-type", :content => "text/html; :charset=>utf-8"}
-    -#%link{:rel=>"stylesheet", :href=>"/stylesheets/master.css", :type=>"text/css", :media=>"screen", :charset=>"utf-8"}
+    
     = css_include_tag "main"
   %body
     #banner
@@ -14,20 +14,29 @@
 
     
       #header
-        #links
+        .links
           = link_to "Home", url(:index)
-          = link_to "Login", url(:login)
+          = login_or_out_link
           
-      .sidebar
+          
+      -#.sidebar
         #right
           
 
-          = link_to image_tag('sponsor_ivey.gif'), "http://iveyandbrown.com?tlm"
+          = sponsor_image
         
       #main
         %p
-          #message
-            &= message
+          - unless message.empty?
+            #message
+              &= message
         = catch_content :for_layout
-
+    #footer
+      
+      = link_to "FAQ", url(:index)
+      = link_to "Privacy", url(:index)
+      #sponsor
+        = sponsor_image
+      
+      
   

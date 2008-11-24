@@ -11,20 +11,18 @@ a {
 
 #body {
   width: 750px;
-  margin: auto;
-  background-color: #fff; }
+  margin: auto; }
 
 #header {
   background-color: #006400;
-  padding: .25em;
-  padding-bottom: 0; }
-  #header #links a {
+  padding: 0 .25em; }
+  #header .links a {
     text-decoration: none;
     width: 250px;
     color: #ffffff;
     background-color: #006400;
     padding: 0em .5em; }
-    #header #links a:hover {
+    #header .links a:hover {
       color: #006400;
       background-color: #ffffff; }
 
@@ -45,10 +43,27 @@ a {
   float: right; }
 
 #main {
-  margin-right: 230px;
-  border-right: solid;
-  border-color: #006400;
   boder-width: 1px;
   padding-right: 1em;
   margin-top: 0;
-  padding-top: 0; }
+  padding-top: 0;
+  background-color: #fff; }
+
+#footer {
+  background-color: #006400;
+  padding: 1em;
+  height: 100px; }
+  #footer .links {
+    float: left;
+    position: relative;
+    top: 40px; }
+  #footer #sponsor {
+    float: right;
+    position: relative;
+    margin-right: 0px;
+    top: -22px; }
+  #footer a {
+    color: #fff;
+    vertical-align: middle; }
+    #footer a:hover {
+      color: #9aff24; }

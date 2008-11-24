@@ -22,12 +22,12 @@ body
 #body
   :width = !width 
   :margin auto
-  :background-color #fff
+
 #header
   :background-color = !dark
-  :padding .25em
-  :padding-bottom 0
-  #links
+  :padding 0 .25em 
+
+  .links
     a
       :text-decoration none
       :width 250px
@@ -54,10 +54,30 @@ body
   :padding 1em
   :float right
 #main
-  :margin-right 230px
-  :border-right solid
-  :border-color = !dark
+  //:margin-right 230px
+  //:border-right solid
+  //:border-color = !dark
   :boder-width 1px
   :padding-right 1em
   :margin-top 0
   :padding-top 0
+  :background-color #fff
+#footer
+  :background-color = !dark
+  :padding 1em
+  :height 100px
+  .links
+    :float left
+    :position relative
+    :top 40px
+  #sponsor
+    :float right
+    :position relative
+    :margin-right 0px
+    :top -22px
+  
+  a
+    :color #fff
+    :vertical-align middle
+    &:hover
+      :color = !accent

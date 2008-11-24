@@ -30,7 +30,19 @@ module Merb
       webpage_title(x.body)
     end
     
+    def logged_in?
+      session[:user_id]
+    end
 
-
+    def login_or_out_link
+      if logged_in?
+        link_to "Login", url(:login)
+      else
+        link_to "Logout", url(:logout)
+      end
+    end
+    def sponsor_image
+      link_to image_tag('sponsor_ivey.gif'), "http://iveyandbrown.com?tlm"
+    end
   end
 end
