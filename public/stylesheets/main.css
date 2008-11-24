@@ -4,26 +4,34 @@ a {
     color: #9aff24;
     background: #006400; }
 
+body {
+  background-image: url('/images/gradient.png');
+  background-repeat: repeat-x;
+  background-color: #006400; }
 
 #banner {
   margin: auto;
-  width: 750px; }
+  width: 750px;
+  position: relative;
+  top: -8px; }
 
 #body {
   width: 750px;
-  margin: auto; }
+  margin: auto;
+  position: relative;
+  top: -8px; }
 
 #header {
-  background-color: #006400;
+  background-color: #8a1b92;
   padding: 0 .25em; }
   #header .links a {
     text-decoration: none;
     width: 250px;
     color: #ffffff;
-    background-color: #006400;
+    background-color: #8a1b92;
     padding: 0em .5em; }
     #header .links a:hover {
-      color: #006400;
+      color: #8a1b92;
       background-color: #ffffff; }
 
 #message {
@@ -43,10 +51,10 @@ a {
   float: right; }
 
 #main {
+  width: 718px;
   boder-width: 1px;
   padding-right: 1em;
-  margin-top: 0;
-  padding-top: 0;
+  padding: 1em;
   background-color: #fff; }
 
 #footer {

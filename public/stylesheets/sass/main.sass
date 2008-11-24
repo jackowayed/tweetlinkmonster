@@ -15,16 +15,24 @@ a
 
 body
   //:background-color = !dark
+  :background-image url('/images/gradient.png')
+  :background-repeat repeat-x
+  :background-color = !dark
 
 #banner
   :margin auto
-  :width = !width 
+  :width = !width
+  :position relative
+  :top -8px
 #body
   :width = !width 
   :margin auto
+  :position relative
+  :top -8px
 
+!link_bg = #8A1B92
 #header
-  :background-color = !dark
+  :background-color = !link_bg
   :padding 0 .25em 
 
   .links
@@ -32,10 +40,10 @@ body
       :text-decoration none
       :width 250px
       :color = !light
-      :background-color = !dark
+      :background-color = !link_bg
       :padding 0em .5em
       &:hover
-        :color = !dark
+        :color = !link_bg
         :background-color = !light
 #message
   :left 50px
@@ -57,10 +65,11 @@ body
   //:margin-right 230px
   //:border-right solid
   //:border-color = !dark
+  :width = !width - 32px
   :boder-width 1px
   :padding-right 1em
-  :margin-top 0
-  :padding-top 0
+  //:margin-top 0
+  :padding 1em
   :background-color #fff
 #footer
   :background-color = !dark
