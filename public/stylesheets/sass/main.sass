@@ -13,12 +13,20 @@ a
     :color = !accent
     :background = !dark
 
+html
+  :height 100%
 body
   //:background-color = !dark
   :background-image url('/images/gradient.png')
   :background-repeat repeat-x
   :background-color = !dark
+  :height 100%
 
+#container
+  :min-height 100%
+  //:height 100%
+  :position relative
+  :margin-bottom -110px
 #banner
   :margin auto
   :width = !width
@@ -75,12 +83,17 @@ body
   //:margin-top 0
   :padding 1em
   :background-color #fff
+#clearfooter
+  :height 110px
+  :clear both
 #footer
-  :background-color = !dark
+  //:background-color = !dark
   :padding 1em
-  :height 100px
-  
-  :bottom 2px
+  :height 110px
+  :position relative
+  :margin 0 auto
+  //:bottom 2px
+  //:vertical-align bottom
   :width 95%
   :clear both
   .links

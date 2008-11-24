@@ -4,10 +4,19 @@ a {
     color: #9aff24;
     background: #006400; }
 
+html {
+  height: 100%; }
+
 body {
   background-image: url('/images/gradient.png');
   background-repeat: repeat-x;
-  background-color: #006400; }
+  background-color: #006400;
+  height: 100%; }
+
+#container {
+  min-height: 100%;
+  position: relative;
+  margin-bottom: -110px; }
 
 #banner {
   margin: auto;
@@ -61,11 +70,15 @@ body {
   padding: 1em;
   background-color: #fff; }
 
+#clearfooter {
+  height: 110px;
+  clear: both; }
+
 #footer {
-  background-color: #006400;
   padding: 1em;
-  height: 100px;
-  bottom: 2px;
+  height: 110px;
+  position: relative;
+  margin: 0 auto;
   width: 95%;
   clear: both; }
   #footer .links {

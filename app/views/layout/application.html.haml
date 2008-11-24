@@ -8,31 +8,33 @@
     
     = css_include_tag "main"
   %body
-    #banner
-      = image_tag 'banner.png'
-    #body
+    #container
+      #banner
+        = image_tag 'banner.png'
+      #body
 
     
-      #header
-        .links
-          = link_to "Home", url(:index)
-          #loginout
-            = login_or_out_link
+        #header
+          .links
+            = link_to "Home", url(:index)
+            #loginout
+              = login_or_out_link
           
           
-      -#.sidebar
-        #right
+        -#.sidebar
+          #right
           
 
-          = sponsor_image
+            = sponsor_image
         
-      #main
-        %p
-          - unless message.empty?
-            #message
-              &= message
+        #main
+          %p
+            - unless message.empty?
+              #message
+                &= message
               
-        = catch_content :for_layout
+          = catch_content :for_layout
+        #clearfooter
     #footer
       
       = link_to "FAQ", url(:index)
@@ -41,4 +43,4 @@
         = sponsor_image
       
       
-  
+            
