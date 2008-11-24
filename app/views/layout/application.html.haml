@@ -16,7 +16,8 @@
       #header
         .links
           = link_to "Home", url(:index)
-          = login_or_out_link
+          #loginout
+            = login_or_out_link
           
           
       -#.sidebar
@@ -30,6 +31,7 @@
           - unless message.empty?
             #message
               &= message
+              
         = catch_content :for_layout
     #footer
       

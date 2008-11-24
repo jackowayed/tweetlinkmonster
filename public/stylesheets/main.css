@@ -24,6 +24,10 @@ body {
 #header {
   background-color: #8a1b92;
   padding: 0 .25em; }
+  #header .links #loginout {
+    float: right;
+    position: relative;
+    top: -19px; }
   #header .links a {
     text-decoration: none;
     width: 250px;
@@ -60,7 +64,10 @@ body {
 #footer {
   background-color: #006400;
   padding: 1em;
-  height: 100px; }
+  height: 100px;
+  bottom: 2px;
+  width: 95%;
+  clear: both; }
   #footer .links {
     float: left;
     position: relative;
@@ -70,6 +77,8 @@ body {
     position: relative;
     margin-right: 0px;
     top: -22px; }
+    #footer #sponsor a img {
+      border-style: none; }
   #footer a {
     color: #fff;
     vertical-align: middle; }

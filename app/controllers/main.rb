@@ -4,7 +4,7 @@ class Main < Application
   # goes to the client...
   def index
    #raise NotFound
-    @_message = "Flash messages (stuff like 'your account has been updated successfully') go here"
+    # @_message ||= "Flash messages (stuff like 'your account has been updated successfully') go here"
     render
   end
   def login

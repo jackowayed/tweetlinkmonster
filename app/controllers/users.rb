@@ -11,7 +11,7 @@ class Users < Application
     #Merb.logger.warn((session[:user_id]).to_s)
     #Merb.logger.warn(logged_in?.to_s)
     #Merb.logger.warn((session[:user_id]==params[:id].to_i).to_s)
-    redirect url(:index) unless logged_in? && session[:user_id]==params[:id].to_i
+    redirect(url(:index), :message => "You must be logged in to go there") unless logged_in? && session[:user_id]==params[:id].to_i
   end
 
   def show

@@ -36,9 +36,9 @@ module Merb
 
     def login_or_out_link
       if logged_in?
-        link_to "Login", url(:login)
-      else
         link_to "Logout", url(:logout)
+      else
+        link_to "Login", url(:login)      
       end
     end
     def sponsor_image
