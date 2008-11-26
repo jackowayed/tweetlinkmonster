@@ -78,9 +78,11 @@ body {
   padding: 1em;
   height: 110px;
   position: relative;
-  margin: 0 auto;
-  width: 95%;
-  clear: both; }
+  margin: 0 0;
+  width: 97%;
+  clear: both;
+  border-top-style: solid;
+  border-color: #9aff24; }
   #footer .links {
     float: left;
     position: relative;
@@ -88,7 +90,7 @@ body {
   #footer #sponsor {
     float: right;
     position: relative;
-    margin-right: 0px;
+    right: 3em;
     top: -22px; }
     #footer #sponsor a img {
       border-style: none; }
