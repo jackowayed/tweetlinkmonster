@@ -19,7 +19,7 @@ class Tweet
     return nil if $&.nil?
     x = $&
     #x = x[0...-1] while /[\.\)\]!\?]/ =~ x[-1].chr
-    x = x[0...-1] until x.blank?||x[-1].chr =~ /[\w\/]/
+    x = x[0...-1] until x.blank?||/[\w\/]/ =~ x[-1].chr
     return nil if x.blank?
     x
   end
