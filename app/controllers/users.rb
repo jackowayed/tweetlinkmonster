@@ -40,6 +40,7 @@ class Users < Application
       session[:user_id]=@user.id
       redirect url(:user, @user.id)
     else
+      @_message = @user.errors
       render :new
     end
   end
