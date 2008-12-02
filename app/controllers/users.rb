@@ -36,6 +36,8 @@ class Users < Application
   def create
     @user = User.new(params[:user])
     Merb.logger.warn("User before save: #{@user.to_yaml}")
+    
+    
     if @user.save
       session[:user_id]=@user.id
       redirect url(:user, @user.id)
@@ -43,6 +45,9 @@ class Users < Application
       @_message = @user.errors
       render :new
     end
+    
+    
+    
   end
 
   def update
