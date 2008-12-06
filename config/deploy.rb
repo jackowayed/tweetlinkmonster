@@ -1,5 +1,5 @@
 set :application, "tweetlinkmonster"
-set :repository,  "git@github.com:ivey/tweetlinkmosnter.git"
+set :repository,  "git@github.com:ivey/tweetlinkmonster.git"
 
 set :deploy_to, "~/#{application}"
 
