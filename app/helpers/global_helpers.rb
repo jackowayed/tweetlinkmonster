@@ -44,5 +44,7 @@ module Merb
     def sponsor_image
       link_to image_tag('sponsor_ivey.gif', :alt=>"Sponsored by Ivey & Brown consluting"), "http://iveyandbrown.com?tlm"
     end
+    def sponsor_text
+      link_to "Ivey & Brown", "http://iveyandbrown.com?tlm"
   end
 end

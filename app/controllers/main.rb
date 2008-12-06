@@ -25,6 +25,15 @@ class Main < Application
     session[:user_id]=nil
     redirect url(:index), :message => 'You have been logged out'
   end
+  def faq
+    render
+  end
+  def privacy
+    render
+  end
+  def about
+    render
+  end
     
   
 end
