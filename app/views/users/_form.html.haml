@@ -3,7 +3,7 @@
     = text_field :username, :label => "Twitter username: "
   %p
     =  password_field :password, :label => "Twitter password: ", :length => 31
-    -#= password_field :confirm_pass, :label => "Confirm passowrd: ", :length => 31
+    =  password_field :name => :confirm_pass, :label => "Confirm passowrd: ", :length => 31
   %p
     = text_field :email, :label => "Email: "
   %p

@@ -17,7 +17,7 @@ set :deploy_via, :copy
 set :copy_strategy, :export
 
 set :user, "tlm"
-#set :password, ""
+set :password, "ifuckinghartyou"
 
 role :app, "209.20.90.165"
 role :web, "209.20.90.165"
@@ -53,7 +53,7 @@ namespace :deploy do
     run "cd #{current_path} && merb -a #{adapter} -k all"  
   end 
 
-  desc 'Custom restart task for Merb' 
+  desc 'Custom restart task for Merb'
   task :restart, :roles => :app do 
     deploy.stop 
     deploy.start 
@@ -109,7 +109,7 @@ namespace :deploy do
   
   namespace :web do
     desc <<-DESC
-      Present a maintenance page to visitors. Disables your application's web \
+      Present a maintenance page to visitors. Disables your web \
       interface by writing a "maintenance.html" file to each web server. The \
       servers must be configured to detect the presence of this file, and if \
       it is present, always display it instead of performing the request.
