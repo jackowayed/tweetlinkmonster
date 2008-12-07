@@ -41,7 +41,7 @@ Merb::Router.prepare do
   match('/acknowledgements').to(:controller => 'main', :action => 'acknowledgements').name(:acknowledgments)
 
 
-
+  
   default_routes
 
   # Change this for your home page to be available at /

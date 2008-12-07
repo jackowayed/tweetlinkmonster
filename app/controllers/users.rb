@@ -42,7 +42,14 @@ class Users < Application
       session[:user_id]=@user.id
       redirect url(:user, @user.id)
     else
-      @_message = @user.errors
+      @_message = ""
+      @user.errors.full_messages.each do |err|
+        @_message << err << ";;;"
+      end
+      Merb.logger.warn("LOOK AT THIS!!!!!!!!")
+      Merb.logger.warn(@_message.to_s)
+      Merb.logger.warn(@user.errors.full_messages.to_s)
+
       render :new
     end
     

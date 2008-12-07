@@ -31,7 +31,7 @@
           %p
             - unless message.empty?
               #message
-                &= message
+                = flash_parse h(message)
               
           = catch_content :for_layout
         #clearfooter

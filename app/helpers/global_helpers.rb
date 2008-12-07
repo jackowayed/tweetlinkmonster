@@ -48,5 +48,8 @@ module Merb
       link_to "Ivey & Brown", "http://iveyandbrown.com?tlm"
 
     end
+    def flash_parse(str)
+      str.gsub(";;;", "<br/>")
+    end
   end
 end
