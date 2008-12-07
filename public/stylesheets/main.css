@@ -78,8 +78,9 @@ body {
   padding: 1em;
   height: 110px;
   position: relative;
-  margin: 0 0;
-  width: 97%;
+  margin: 0;
+  overflow-x: hidden;
+  overflow-y: hidden;
   clear: both;
   border-top-style: solid;
   border-color: #9aff24; }
