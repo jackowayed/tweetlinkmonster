@@ -99,3 +99,6 @@ body {
     vertical-align: middle; }
     #footer a:hover {
       color: #9aff24; }
+
+#faq .question {
+  font-weight: bold; }

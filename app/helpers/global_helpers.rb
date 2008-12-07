@@ -46,5 +46,7 @@ module Merb
     end
     def sponsor_text
       link_to "Ivey & Brown", "http://iveyandbrown.com?tlm"
+
+    end
   end
 end

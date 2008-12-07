@@ -34,6 +34,9 @@ class Main < Application
   def about
     render
   end
+  def acknowledgements
+    render
+  end
     
   
 end

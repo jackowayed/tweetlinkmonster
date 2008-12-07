@@ -35,7 +35,13 @@ Merb::Router.prepare do
   match('/').to(:controller => 'main', :action => 'index').name(:index)
   match('/login').to(:controller => 'main', :action => 'login').name(:login)
   match('/logout').to(:controller => 'main', :action => 'log_user_out').name(:logout)
-  
+  match('/faq').to(:controller => 'main', :action => 'faq').name(:faq)
+  match('/privacy').to(:controller => 'main', :action => 'privacy').name(:privacy)
+  match('/about').to(:controller => 'main', :action => 'about').name(:about)
+  match('/acknowledgements').to(:controller => 'main', :action => 'acknowledgements').name(:acknowledgments)
+
+
+
   default_routes
 
   # Change this for your home page to be available at /
