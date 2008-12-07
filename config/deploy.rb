@@ -4,7 +4,7 @@ set :repository,  "git@github.com:ivey/tweetlinkmonster.git"
 set :deploy_to, "~/#{application}"
 
 set :adapter, 'mongrel'
-set :start_port, 4000
+set :start_port, 5000
 set :processes, 2
 set :log_path, "#{shared_path}/log/production.log"
 set :log_level, "info"
