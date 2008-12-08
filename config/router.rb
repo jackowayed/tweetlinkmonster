@@ -38,7 +38,7 @@ Merb::Router.prepare do
   match('/faq').to(:controller => 'main', :action => 'faq').name(:faq)
   match('/privacy').to(:controller => 'main', :action => 'privacy').name(:privacy)
   match('/about').to(:controller => 'main', :action => 'about').name(:about)
-  match('/acknowledgements').to(:controller => 'main', :action => 'acknowledgements').name(:acknowledgments)
+  match('/contact').to(:controller => 'main', :action => 'contact').name(:contact)
 
 
   
