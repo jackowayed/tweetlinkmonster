@@ -9,7 +9,7 @@
 
 :production:
   :adapter: mysql
-  :database: tlm_tweetlinkmonster
-  :username: tlm_tlm
-  :password: guessy3cant!
+  :database: tlm
+  :username: tlm
+  :password: imamonsterrar!
   :host: localhost
