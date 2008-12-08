@@ -3,7 +3,7 @@ set :repository,  "git@github.com:ivey/tweetlinkmonster.git"
 
 set :deploy_to, "~/#{application}"
 
-set :adapter, 'mongrel'
+set :adapter, 'thin'
 set :start_port, 5000
 set :processes, 2
 set :log_path, "#{shared_path}/log/production.log"
@@ -125,18 +125,23 @@ namespace :deploy do
       Further customization will require that you write your own task.
     DESC
     task :disable, :roles => :web, :except => { :no_release => true } do
-      require 'erb'
+      require 'rubygems'
+      require 'haml'
       require 'rss/1.0'
       require 'rss/2.0'
       on_rollback { run "rm #{shared_path}/system/maintenance.html" }
 
-      started = ENV['STARTED']
-      reason = ENV['REASON']
-      deadline = ENV['UNTIL']
-      tz = TZInfo::Timezone.get('America/New_York')
+      #started = ENV['STARTED'] || Time.now
+      #reason = ENV['REASON']   || "Maintenance"
+      #deadline = ENV['UNTIL']  || Time.now #+ 15.minutes
+      #tz = TZInfo::Timezone.get('America/New_York')
 
-      template = File.read('./app/views/layout/maintenance.html.erb')
-      result = ERB.new(template).result(binding)
+      started = Time.now
+      reason = "Maintenance"
+      deadline = Time.now
+
+      template = File.read('./app/views/layout/maintenance.html.haml')
+      result = Haml::Engine.new(template).render(Object.new, {:started => started, :reason => reason, :deadline => deadline})
 
       put result, "#{shared_path}/system/maintenance.html", :mode => 0644
     end
