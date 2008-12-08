@@ -7,8 +7,12 @@ _ Working cron script
 _ Console on new prod server
 _ Threaded tweet updates
 _ Make cap file work a lot better
-_ Make maintenance page actually compile
-
+/ Make maintenance page actually upload XcompileX
+_ username: tweet with link to the tweet
+  What this needs:
+  * tweeter_username column in db
+  * twitter_tweet_id column in db
+  * method to glue them together into a link
 
 
 
