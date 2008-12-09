@@ -1,4 +1,4 @@
 #!/bin/sh
 date
-ruby bin/merb -e production -r update_tweets.rb
+/usr/local/bin/merb -e production -r update_tweets.rb
 echo "done"
