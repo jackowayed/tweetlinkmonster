@@ -26,7 +26,8 @@
         =tweet.created_at
       %content
         -if tweet.twitter_id
-          = tweet.author_uname, tweet.twitter_id
+          = link_to "#{tweet.author_uname}:", "http://www.twitter.com/#{tweet.author_uname}/status/#{tweet.twitter_id}"
+          -#= tweet.author_uname, tweet.twitter_id
         =tweet.text
     
 
