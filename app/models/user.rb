@@ -56,7 +56,7 @@ class User
       tweets.reverse.each do |t|
         next unless t.user.screen_name != self.username && Tweet.find_website(t.text)
         title = self.find_site_title(Tweet.find_website(t.text))
-        tweet = Tweet.new({:user_id => self.id, :text => t.text, :created_at => t.created_at, :author => t.user.name, :title => title})
+        tweet = Tweet.new({:user_id => self.id, :text => t.text, :created_at => t.created_at, :author => t.user.name, :title => title, :author_uname => t.user.screen_name, :twitter_id => t.id})
         tweet.save #if t.user.screen_name != self.username && tweet.website
       end
     rescue
