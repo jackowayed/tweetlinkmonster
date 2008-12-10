@@ -25,6 +25,8 @@
       %updated
         =tweet.created_at
       %content
+        -if tweet.twitter_id
+          = tweet.author_uname, tweet.twitter_id
         =tweet.text
     
 
