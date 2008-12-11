@@ -1,3 +1,4 @@
+
 Stuff to do on tlm:
 _ CSS work on IE
 _ CSS work on Opera
@@ -8,7 +9,9 @@ X Working cron script
 X Console on new prod server
 _ Threaded tweet updates
 _ Make cap file work a lot better
-/ Make maintenance page actually upload XcompileX
+  * Maintenance file needs to upload
+  * web:stop needs to actually kill merb
+  * deploy newest code
 X username: tweet with link to the tweet
   What this needs:
   * tweeter_username column in db
