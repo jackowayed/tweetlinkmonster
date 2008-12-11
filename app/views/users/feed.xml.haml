@@ -24,10 +24,12 @@
         ="http://www.tweetlinkmonster.com/feed/#{@user.username}"
       %updated
         =tweet.created_at
-      %content
-        -if tweet.twitter_id
-          = link_to "#{tweet.author_uname}:", "http://www.twitter.com/#{tweet.author_uname}/status/#{tweet.twitter_id}"
-          -#= tweet.author_uname, tweet.twitter_id
-        =tweet.text
+      %content{:type=>'xhtml'}
+        #tweet{:xmlns=>'http://www.w3.org/1999/xhtml'}
+          -unless tweet.twitter_id.nil?
+            -#%a{:href=>"http://www.twitter.com/#{tweet.author_uname}/status/#{tweet.twitter_id}"} 
+              ="#{tweet.author_uname}:" 
+            = tweet_link tweet.author_uname, tweet.twitter_id
+          =tweet.text
     
 
