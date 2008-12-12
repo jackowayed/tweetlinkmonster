@@ -50,7 +50,7 @@ namespace :deploy do
 
   desc "Stop Merb Instances"  
   task :stop do 
-    run "cd #{current_path} && merb -a #{adapter} -k all"  
+    run "cd #{current_path} && merb -a #{adapter} -K all"  
   end 
 
   desc 'Custom restart task for Merb'
