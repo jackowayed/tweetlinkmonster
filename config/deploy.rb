@@ -3,6 +3,8 @@ set :repository,  "git@github.com:ivey/tweetlinkmonster.git"
 
 set :deploy_to, "~/#{application}"
 
+set :repository_cache, "#{application}-src"
+
 set :adapter, 'thin'
 set :start_port, 5000
 set :processes, 2
@@ -10,18 +12,20 @@ set :log_path, "#{shared_path}/log/production.log"
 set :log_level, "info"
 
 set :scm, :git
-default_run_options[:pty] = true
-set :deploy_via, :copy
+#default_run_options[:pty] = true
+set :deploy_via, :remote_cache#:copy
+set :ssh_options, :forward_agent => true
 # set :copy_cache, true
 # set :copy_exclude, ".git/*"
-set :copy_strategy, :export
+#set :copy_strategy, :export
+set :keep_releases, 3
 
 set :user, "tlm"
 set :password, "ifuckinghartyou"
 
-role :app, "209.20.90.165"
-role :web, "209.20.90.165"
-role :db,  "209.20.90.165", :primary => true
+role :app, "www.tweetlinkmonster.com"
+role :web, "www.tweetlinkmonster.com"
+role :db,  "www.tweetlinkmonster.com", :primary => true
 
 namespace :deploy do
   namespace :symlinks do
