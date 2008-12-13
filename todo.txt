@@ -7,7 +7,7 @@ _ I haven't even looked at Safari
 
 X Working cron script
 X Console on new prod server
-_ Threaded tweet updates
+% Threaded tweet updates
 _ Make cap file work a lot better
   * Maintenance file needs to upload
   * web:stop needs to actually kill merb
