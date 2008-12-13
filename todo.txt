@@ -1,6 +1,6 @@
 
 Stuff to do on tlm:
-_ CSS work on IE
+X CSS work on IE
 _ CSS work on Opera
 _ I haven't even looked at Safari
 % Pretty Exceptions
