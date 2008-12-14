@@ -13,5 +13,5 @@
 %p
   Your feed: 
   -#=link_to feed, url(:feed, @user)
-  -feed ="http://www.tweetlinkmonster.com/feed/#{@user.username}.xml" 
+  -feed ="http://www.tweetlinkmonster.com/feed/#{@user.username}.atom" 
   =link_to feed, feed

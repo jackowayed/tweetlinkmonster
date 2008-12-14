@@ -148,7 +148,7 @@ Merb::Config.use do |c|
   c[:session_store] = 'cookie'
 end
 
-
+Merb.add_mime_type(:atom, :to_atom, %w[application/atom+xml])
 # ==== Tune your inflector
 
 # To fine tune your inflector use the word, singular_word and plural_word

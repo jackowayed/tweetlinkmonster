@@ -77,7 +77,7 @@ class Users < Application
     end
   end
   def feed
-    only_provides :xml
+    only_provides :xml, :atom
     #Merb.logger.warn("params[:username]#{params.to_s}")
     raise NotFound unless @user = User.find_by_username(params[:username]) 
     #@user.update_tweets
