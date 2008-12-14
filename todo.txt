@@ -9,9 +9,9 @@ X Working cron script
 X Console on new prod server
 % Threaded tweet updates
 _ Make cap file work a lot better
-  * Maintenance file needs to upload
-  * web:stop needs to actually kill merb
-  * deploy newest code
+  _ Maintenance file needs to upload
+  _ web:stop needs to actually kill merb
+  X deploy newest code
 X username: tweet with link to the tweet
   What this needs:
   * tweeter_username column in db
