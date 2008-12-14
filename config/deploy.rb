@@ -54,7 +54,7 @@ namespace :deploy do
 
   desc "Stop Merb Instances"  
   task :stop do 
-    run "cd #{current_path} && merb -a #{adapter} -K all"  
+    run "cd #{current_path} && skill merb" #-a #{adapter} -K all"  
   end 
 
   desc 'Custom restart task for Merb'
@@ -67,7 +67,7 @@ namespace :deploy do
   task :rolling, :roles => :app do
     processes.times do |x|
       port = start_port + x
-      run "cd #{current_path} && skill merb" # -k #{port}"
+      run "cd #{current_path} && merb -k #{port}"
       run "merb -a #{adapter} -e production -d --port #{port} -m #{current_path} -l #{log_level} -L #{log_path}"
       sleep 5
     end
