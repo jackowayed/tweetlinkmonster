@@ -4,4 +4,5 @@ log/*
 db/*
 *.~*~
 *#*#
-public/stylesheets/*.css
+public/stylesheets/main.css
+public/stylesheets/ie.css
