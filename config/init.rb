@@ -68,7 +68,7 @@ Merb::BootLoader.after_app_loads do
         
 
 end
-dependencies "dm-validations", "htmlentities", "dm-ar-finders", "merb_helpers", "merb-assets", "twitter"
+dependencies "dm-validations", "htmlentities", "dm-ar-finders", "merb_helpers", "merb-assets", "twitter", "dm-types"
 require "open-uri"
 require "base64"
 require "net/http"

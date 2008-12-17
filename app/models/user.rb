@@ -3,6 +3,7 @@ class User
   include DataMapper::Resource
 
   has n, :tweets
+  has n, :bad_sites
 
   property :username, String, :nullable => false, :unique => true, :format => /\w+/
 
