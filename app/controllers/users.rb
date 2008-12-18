@@ -59,10 +59,10 @@ class Users < Application
     raise NotFound unless @user
     if @user.update_attributes(params[:user]) || !@user.dirty?
       @_message = "Your account has been successfully updated."
-      redirect url(:user, @user)
+      redirect url(:user, @user), :message => @_message
     else
       @_message = error_message_encode @user
-      redirect url(:user, @user)
+      redirect url(:user, @user), :message => @_message
     end
   end
 
