@@ -42,10 +42,7 @@ class Users < Application
       session[:user_id]=@user.id
       redirect url(:user, @user.id)
     else
-      @_message = ""
-      @user.errors.full_messages.each do |err|
-        @_message << err << ";;;"
-      end
+      @_message = error_message_encode @user
       Merb.logger.warn("LOOK AT THIS!!!!!!!!")
       Merb.logger.warn(@_message.to_s)
       Merb.logger.warn(@user.errors.full_messages.to_s)
@@ -61,9 +58,11 @@ class Users < Application
     @user = User.get(params[:id])
     raise NotFound unless @user
     if @user.update_attributes(params[:user]) || !@user.dirty?
+      @_message = "Your account has been successfully updated."
       redirect url(:user, @user)
     else
-      raise BadRequest
+      @_message = error_message_encode @user
+      redirect url(:user, @user)
     end
   end
 
@@ -87,6 +86,13 @@ class Users < Application
     #end
     render
     
+  end
+  def error_message_encode(user)
+    mess = ""
+      @user.errors.full_messages.each do |err|
+        mess << err << ";;;"
+      end
+    mess
   end
 
 end # Users

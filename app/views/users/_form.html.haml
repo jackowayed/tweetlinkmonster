@@ -1,10 +1,10 @@
-= form_for(@user, :action => url(:users) ) do |f|
+- old = !exists.nil? && exists
+- action = (old)?(resource(@user)):(resource(:users))
+= form_for(@user, :action => action ) do
   %p
     = text_field :username, :label => "Twitter username: "
   %p
     =  password_field :password, :label => "Twitter password: ", :length => 31
-  %p
-    =  password_field :name => :confirm_pass, :label => "Confirm password: ", :length => 31
   %p
     = text_field :email, :label => "Email: "
   %p

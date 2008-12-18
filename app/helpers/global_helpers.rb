@@ -51,5 +51,9 @@ module Merb
     def flash_parse(str)
       str.gsub(";;;", "<br/>")
     end
+    def signup_or_user_home
+      link_to "Account Home", resource(User.get(logged_in?.to_i)) if logged_in?
+      link_to "Sign Up", resource(:users, :new)
+    end
   end
 end

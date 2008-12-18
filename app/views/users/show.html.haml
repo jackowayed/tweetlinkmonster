@@ -16,4 +16,13 @@
   -feed ="http://www.tweetlinkmonster.com/feed/#{@user.username}.atom" 
   =link_to feed, feed
 %p
-  = partial :form
+  = partial :form, :exists => true
+%h2 Blacklist
+%p
+  Tired of all of the links your friends tweet from certain sites (blip.fm, brightkite.com, etc.)? Block them!
+%p
+  Any site matching the 
+  = link_to "Regular Expressions", "http://en.wikipedia.org/wiki/regular_expression"
+  you enter will be blocked. 
+%p
+  If you have no idea what that means just type something in the format "domain.ext" (ie. google.com). It is not advisable to precede it with "www." or "http://" in general. 
