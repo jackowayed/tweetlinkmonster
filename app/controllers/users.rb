@@ -89,9 +89,9 @@ class Users < Application
   end
   def error_message_encode(user)
     mess = ""
-      @user.errors.full_messages.each do |err|
-        mess << err << ";;;"
-      end
+    @user.errors.full_messages.each do |err|
+      mess << err << ";;;"
+    end
     mess
   end
 

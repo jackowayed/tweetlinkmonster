@@ -52,8 +52,9 @@ module Merb
       str.gsub(";;;", "<br/>")
     end
     def signup_or_user_home
-      link_to "Account Home", resource(User.get(logged_in?.to_i)) if logged_in?
-      link_to "Sign Up", resource(:users, :new)
+      return link_to "Sign Up", resource(:users, :new) if logged_in?.blank?
+      link_to "Account Home", resource(User.get(logged_in?.to_i))
+      #logged_in?.blank?
     end
   end
 end
