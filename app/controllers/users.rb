@@ -5,7 +5,7 @@ class Users < Application
   #  @users = User.all
   #  display @users
   #end
-  before :check_login, :only => [:show, :edit, :update, :destroy]
+  before :check_login, :only => [:show, :edit, :update, :destroy, :batch_update_bad_sites]
   def check_login
     #Merb.logger.warn(params[:id])
     #Merb.logger.warn((session[:user_id]).to_s)
@@ -94,5 +94,7 @@ class Users < Application
     end
     mess
   end
-
+  def batch_update_bad_sites
+    redirect url(:index)
+  end
 end # Users
