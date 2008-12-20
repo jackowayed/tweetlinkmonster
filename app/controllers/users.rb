@@ -121,9 +121,9 @@ class Users < Application
           end
         end
       else
-        #if a = @user.bad_sites[ind.to_i]
-          #a.destroy
-        #end       
+        if a = bad_sites[ind.to_i]
+          a.destroy
+        end       
       end
 
  
