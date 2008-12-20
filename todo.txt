@@ -4,7 +4,7 @@ X CSS work on IE
 _ CSS work on Opera
 _ I haven't even looked at Safari
 % Pretty Exceptions
-_ Feedback
+X Feedback
 
 X Working cron script
 X Console on new prod server
@@ -19,6 +19,7 @@ X username: tweet with link to the tweet
   * twitter_tweet_id column in db
   * method to glue them together into a link
 
+_ Fix possibility of brute-force pass attacks
 
 
 Legend:

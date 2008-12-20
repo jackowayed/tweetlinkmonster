@@ -107,14 +107,17 @@ class Users < Application
 
     #Merb.logger.fatal(params[:user][:bad_site].to_s)
     params[:user][:bad_sites].each do |ind,reg|
+      Merb.logger.fatal(ind.to_s)
+      Merb.logger.fatal(reg.to_s)
+      bad_sites = @user.bad_sites
       unless reg == "" || reg == "//" || reg==" "
-        if a = @user.bad_sites[ind.to_i]
+        if a = bad_sites[ind.to_i]
           a.pattern=reg
           a.update if a.dirty?
         else
           a = BadSite.new(:pattern => reg, :user_id => @user.id)
           unless a.save
-            redirect resource(@user), :message => "Blocked Site #{reg} is invalid."
+            redirect resource(@user), :message => "Blocked Site #{reg.to_good_s} is invalid."
           end
         end
       else
