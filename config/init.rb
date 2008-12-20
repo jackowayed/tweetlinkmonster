@@ -3,6 +3,11 @@ class Merb::Request
     @env['REDIRECT_URL'] || @env['REQUEST_PATH'] || @env['REQUEST_URI'] || path_info
   end
 end
+class Regexp
+  def to_good_s
+    self.to_s.gsub(/\\\//, "/")[7...-1]
+  end
+end
 
 #
 # ==== Structure of Merb initializer

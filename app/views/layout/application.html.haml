@@ -33,7 +33,7 @@
         
         #main
           %p
-            - unless message.empty?
+            - unless message.to_s.empty?
               #message
                 = flash_parse h(message)
               

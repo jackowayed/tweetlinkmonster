@@ -57,6 +57,8 @@ class Users < Application
   def update
     @user = User.get(params[:id])
     raise NotFound unless @user
+    Merb.logger.error("LOOK AT THIS!!!!!!!!!!!!!")
+    Merb.logger.error(params[:user][:username].to_s)
     if @user.update_attributes(params[:user]) || !@user.dirty?
       @_message = "Your account has been successfully updated."
       redirect url(:user, @user), :message => @_message
@@ -65,6 +67,7 @@ class Users < Application
       redirect url(:user, @user), :message => @_message
     end
   end
+
 
   def destroy
     @user = User.get(params[:id])
@@ -95,6 +98,33 @@ class Users < Application
     mess
   end
   def batch_update_bad_sites
-    redirect url(:index)
+    @user = User.get(logged_in?)
+    raise NotFound unless @user
+
+    #Merb.logger.fatal(params[:user][:bad_sites][1].to_s)
+    #Merb.logger.fatal(params[:user][:bad_sites][0.to_s].to_s)
+    #Merb.logger.fatal((params[:user][:bad_sites]['1']).to_s)
+
+    #Merb.logger.fatal(params[:user][:bad_site].to_s)
+    params[:user][:bad_sites].each do |ind,reg|
+      unless reg == "" || reg == "//" || reg==" "
+        if a = @user.bad_sites[ind.to_i]
+          a.pattern=reg
+          a.update if a.dirty?
+        else
+          a = BadSite.new(:pattern => reg, :user_id => @user.id)
+          unless a.save
+            redirect resource(@user), :message => "Blocked Site #{reg} is invalid."
+          end
+        end
+      else
+        #if a = @user.bad_sites[ind.to_i]
+          #a.destroy
+        #end       
+      end
+
+ 
+    end
+    redirect resource(@user), :message => "Blacklist updated successfully"
   end
 end # Users
