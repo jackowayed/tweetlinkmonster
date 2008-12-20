@@ -173,5 +173,8 @@ class User
     end
     true
   end
+  after :save do
+    self.meta_tweet_update
+  end
 end
 

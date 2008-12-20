@@ -147,9 +147,10 @@ namespace :deploy do
       template = File.read('./app/views/layout/maintenance.html.haml')
       result = Haml::Engine.new(template).render(Object.new, {:started => started, :reason => reason, :deadline => deadline})
 
+      puts result
       put result, "#{shared_path}/system/maintenance.html", :mode => 0644
     end
-  end
+   end
   
 end
 
