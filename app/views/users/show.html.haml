@@ -32,10 +32,12 @@
       %p
         -value = (@user.bad_sites.length<=time)?"":@user.bad_sites[time].pattern.to_good_s
         = text_field :name => "user[bad_sites][#{time}]", :label => "Blocked Site: ", :value => value
-    = link_to "Add Another Filter Box", "javascript:addFilterBox()"
   %p
-    = submit "Update Blacklist"
+    %a{:id=>"addfilter"} Add Another Filter Box
+    -#= link_to "Add Another Filter Box", "#", :id => "addfilter"
+  = submit "Update Blacklist"
 %script{:text => "text/javascript"}
   $(document).ready(function(){
   = "badsites = #{[3, @user.bad_sites.length].max};"
-  }
+  })
+= js_include_tag 'blacklist'
