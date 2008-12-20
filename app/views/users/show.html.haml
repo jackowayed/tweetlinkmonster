@@ -37,5 +37,5 @@
     = submit "Update Blacklist"
 %script{:text => "text/javascript"}
   $(document).ready(function(){
-  = "badsites = [3, @user.bad_sites.length].max;"
+  = "badsites = #{[3, @user.bad_sites.length].max};"
   }
