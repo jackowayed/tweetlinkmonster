@@ -39,14 +39,17 @@ class Users < Application
     
     
     if @user.save
-      session[:user_id]=@user.id
-      redirect url(:user, @user.id)
+      if params[:accept]
+        session[:user_id]=@user.id
+        redirect url(:user, @user.id)
+      else
+        @_message = "You must accept the terms of service."
+        render :new
+      end
     else
       @_message = error_message_encode @user
-      Merb.logger.warn("LOOK AT THIS!!!!!!!!")
-      Merb.logger.warn(@_message.to_s)
-      Merb.logger.warn(@user.errors.full_messages.to_s)
-
+      @_message << "You must accept the terms of service"
+      
       render :new
     end
     

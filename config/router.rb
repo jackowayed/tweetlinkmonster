@@ -39,6 +39,7 @@ Merb::Router.prepare do
   match('/privacy').to(:controller => 'main', :action => 'privacy').name(:privacy)
   match('/about').to(:controller => 'main', :action => 'about').name(:about)
   match('/contact').to(:controller => 'main', :action => 'contact').name(:contact)
+  match('/terms').to(:controller => 'main', :action => 'terms').name(:terms)
   match('/bad_sites/batch_update').to(:controller => 'users', :action => 'batch_update_bad_sites').name(:update_bad_sites)
 
   

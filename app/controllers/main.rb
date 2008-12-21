@@ -37,6 +37,8 @@ class Main < Application
   def contact
     render
   end
-    
+  def terms
+    render
+  end
   
 end
