@@ -212,4 +212,9 @@ namespace :db do
     end
   end
 end
-
+namespace :stats do
+  desc "show all users with count"
+  task :user_count do
+    run "cd ~ && ./count_tlm_users.sh"
+  end
+end
