@@ -5,7 +5,7 @@ set :deploy_to, "~/#{application}"
 
 set :repository_cache, "#{application}-src"
 
-set :adapter, 'thin'
+set :adapter, 'mongrel'
 set :start_port, 5000
 set :processes, 2
 set :log_path, "#{shared_path}/log/production.log"
@@ -55,6 +55,8 @@ namespace :deploy do
   desc "Stop Merb Instances"  
   task :stop do 
     run "cd #{current_path} && skill merb" #-a #{adapter} -K all"  
+    sleep 1
+    run "skill -9 merb"
   end 
 
   desc 'Custom restart task for Merb'
