@@ -49,7 +49,7 @@ namespace :deploy do
 
   desc "Start Merb Instances"  
   task :start do
-    run "merb -a #{adapter} -e production -c #{processes} --port #{start_port} -m #{current_path} -l #{log_level} -L #{log_path}"  
+    run "merb -a #{adapter} -e production --port #{start_port} -m #{current_path} -l #{log_level} -L #{log_path} &"  
   end 
 
   desc "Stop Merb Instances"  
