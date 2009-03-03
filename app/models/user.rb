@@ -32,6 +32,7 @@ class User
     Merb.logger.warn "get_tweets called"
     options = {:page => page}
     options[:since_id] = self.last_tweet_seen if self.last_tweet_seen
+    options[:count] = 200
     Merb.logger.warn options.to_s
     twitter_obj.timeline(:friends, options)
   end
