@@ -7,7 +7,7 @@ set :repository_cache, "#{application}-src"
 
 set :adapter, 'mongrel'
 set :start_port, 5000
-set :processes, 2
+set :processes, 1
 set :log_path, "#{shared_path}/log/production.log"
 set :log_level, "info"
 
@@ -49,7 +49,7 @@ namespace :deploy do
 
   desc "Start Merb Instances"  
   task :start do
-    run "merb -a #{adapter} -e production --port #{start_port} -m #{current_path} -l #{log_level} -L #{log_path} &"  
+    run "merb -a #{adapter} -e production -c #{processes} --port #{start_port} -m #{current_path} -l #{log_level} -L #{log_path}"  
   end 
 
   desc "Stop Merb Instances"  
