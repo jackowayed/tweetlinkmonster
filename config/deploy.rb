@@ -34,12 +34,12 @@ namespace :deploy do
       run "mkdir -p #{release_path}/tmp"
       run "ln -nfs #{shared_path}/tmp/cache #{release_path}/tmp/cache"
     end
-
+  
     desc "Link in the log directory"
     task :log do
       run "ln -nfs #{shared_path}/log #{release_path}/log"
     end
-
+    
     desc "Do all the symlinks"
     task :all do
       cache
@@ -47,24 +47,24 @@ namespace :deploy do
     end
   end
 
-  desc "Start Merb Instances"
+  desc "Start Merb Instances"  
   task :start do
-    run "/opt/ruby-enterprise-1.8.6-20090201/bin/ruby /usr/local/bin/merb -a #{adapter} -e production -c #{processes} --port #{start_port} -m #{current_path} -l #{log_level} -L #{log_path}"
-  end
+    run "merb -a #{adapter} -e production -c #{processes} --port #{start_port} -m #{current_path} -l #{log_level} -L #{log_path}"  
+  end 
 
-  desc "Stop Merb Instances"
-  task :stop do
-    run "cd #{current_path} && merb -a #{adapter} -K all"
+  desc "Stop Merb Instances"  
+  task :stop do 
+    run "cd #{current_path} && skill merb" #-a #{adapter} -K all"  
     sleep 1
-    run "skill -9 ruby"
-  end
+    run "skill -9 merb"
+  end 
 
   desc 'Custom restart task for Merb'
-  task :restart, :roles => :app do
-    deploy.stop
-    deploy.start
+  task :restart, :roles => :app do 
+    deploy.stop 
+    deploy.start 
   end
-
+  
   desc "Rolling restart the mongrels"
   task :rolling, :roles => :app do
     processes.times do |x|
@@ -74,12 +74,12 @@ namespace :deploy do
       sleep 5
     end
   end
-
+  
   desc "Migrate the database"
   task :migrate do
     run "cd #{current_release}; rake db:migrate MERB_ENV=production"
   end
-
+  
   desc "Do a full deployment"
   task :long do
     ENV['REASON'] ||= "a fresh batch of new software"
@@ -103,7 +103,7 @@ namespace :deploy do
     sleep 10
     deploy.web.enable
   end
-
+  
   desc "Sneak in a really quick deployment"
   task :sneak do
     transaction do
@@ -112,7 +112,7 @@ namespace :deploy do
       deploy.rolling
     end
   end
-
+  
   namespace :web do
     desc <<-DESC
       Present a maintenance page to visitors. Disables your web \
@@ -153,7 +153,7 @@ namespace :deploy do
       put result, "#{shared_path}/system/maintenance.html", :mode => 0644
     end
    end
-
+  
 end
 
 namespace :logs do
@@ -186,12 +186,12 @@ namespace :nginx do
   task :start do
     run "sudo /etc/init.d/nginx start"
   end
-
+  
   desc "Stop Nginx"
   task :stop do
     run "sudo /etc/init.d/nginx stop"
   end
-
+  
 end
 
 after "deploy:update_code", "deploy:symlinks:all"
@@ -203,7 +203,7 @@ end
 
 namespace :db do
   namespace :sessions do
-    desc "Clear old database-stored sessions"
+    desc "Clear old database-stored sessions" 
     task :clear, :roles => :app do
       run "cd #{current_path} && " << %q|merb -r 'Merb::ActiveRecordSession.destroy_all( ["updated_at < ?", 1.week.ago ] )' -e production|
     end
