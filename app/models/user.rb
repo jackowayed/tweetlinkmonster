@@ -66,12 +66,12 @@ class User
       puts "#{$!} from the tweet-construction loop"
       return false
     end
-    
+
     return true
   end
   def expire_tweets
     self.tweets.each do |t|
-      t.delete_if_expired 
+      t.delete_if_expired
     end
   end
   def password
@@ -132,7 +132,7 @@ class User
  end
  def find_site_title(uri)
    uri=uri_ify(uri)
-   doc= nil 
+   doc= nil
    title = nil
    begin
      timeout(10) do
@@ -146,11 +146,10 @@ class User
      title = "Title Not Found"
    end
    return title if title
-   puts doc.class
    str = /<title>.+<\/title>/ =~ doc.read
    return (str)?($&[7...-8]):("Title Not Found")
   end
-      
+
   def uri_ify(str)
     str=((/https?:\/\//=~str)||(/ftp:\/\//=~str))?(str):("http://#{str}")
     str+='/' unless str[10] && /\// =~str[10..-1]

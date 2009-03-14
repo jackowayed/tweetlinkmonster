@@ -1,3 +1,4 @@
 User.all.each do |u|
-    u.update_tweets
+  puts u
+  u.update_tweets
 end
