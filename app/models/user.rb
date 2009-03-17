@@ -9,22 +9,14 @@ class User
 
   property :id, Integer, :serial => true, :nullabe => false
 
-  property :pass_hash, String, :nullabe => false, :length => 48
-
   property :email, String, :nullable => false, :unique => true, :format => :email_address
 
   property :last_tweet_seen, Integer, :precision => 64
 
-  validates_with_method :validate_twitter_info
-  def validate_twitter_info
-    x = Twitter::Base.new self.username, self.password
-    begin
-      x.verify_credentials
-      true
-    rescue
-      [false, "Twitter says your username and password are wrong. Make sure you're using your correct Twitter info and try again. If Twitter is down, you need to try again when it's up."]
-    end
-  end
+  property :token, String, :nullable => false
+
+  property :secret, String, :nullable => false
+
 
 
 
@@ -73,19 +65,6 @@ class User
     self.tweets.each do |t|
       t.delete_if_expired
     end
-  end
-  def password
-    crypt = User.crypt_obj
-    return nil unless self.pass_hash
-    return crypt.decrypt_string(Base64.decode64(self.pass_hash))
-  end
-  def password=(pass)
-    crypt = User.crypt_obj
-    self.pass_hash = Base64.encode64(crypt.encrypt_string(pass))
-  end
-  def self.crypt_obj
-    require 'crypt/rijndael'
-    Crypt::Rijndael.new((Merb.env=="production")?("odiosh4redhostingsomuch!merbcool"):("thiskey!"*2))
   end
   def change_to_rand_pass
     self.password=User.random_password
