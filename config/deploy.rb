@@ -52,8 +52,13 @@ namespace :deploy do
     run "merb -a #{adapter} -e production -c #{processes} --port #{start_port} -m #{current_path} -l #{log_level} -L #{log_path}"  
   end 
 
-  desc "Stop Merb Instances"  
-  task :stop do 
+  desc "Stop Merb Instances"
+  task :stop do
+    run "cd #{current_path} && merb -a #{adapter} -K all"
+  end
+
+  desc "Totally Stop All Merb (skill)"  
+  task :hardstop do 
     run "cd #{current_path} && skill merb" #-a #{adapter} -K all"  
     sleep 1
     run "skill -9 merb"
