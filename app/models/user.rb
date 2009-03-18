@@ -19,7 +19,26 @@ class User
 
 
 
+  
+  def self.consumer
+    # The readkey and readsecret below are the values you get during registration
+    #TODO get the real vals of these keys when Twitter gets TLM registered 
+  OAuth::Consumer.new("OmwO7wsjtYHjquu6bd6C4w",
+                      "j1kZ6yzsqChkeQtToErUx2LnPQMsSPkXMkiy4F82sPA",
+                      { :site=>"http://twitter.com" })
 
+  end
+  def access_token
+    @access_token ||= OAuth::AccessToken.new(User.consumer, self.token, self.secret)
+  def fetch_tweets(since = nil, page = 1)
+    Hpricot.XML User.consumer.request(:get, '/friends.xml', self.access_token, {scheme => :query_string})
+  end
+  def get_tweets(since = nil, page=1)
+    doc = self.fetch_tweets since, page
+    (doc/:status).collect do |status|
+      Tweet.new {:user_id => self.id, :text => (status/:text).inner_html, :created_at => (status/:created_at).inner_html, :author => (status/:user/:name).inner_html, :author_uname => (status/:user/:author_uname).inner_html, :twitter_id => (status/:id).inner_html}
+    end
+  end
   def get_tweets(twitter_obj, page = 1)
     Merb.logger.warn "get_tweets called"
     options = {:page => page}
@@ -29,10 +48,8 @@ class User
     twitter_obj.timeline(:friends, options)
   end
   def update_tweets
-    x = Twitter::Base.new(self.username, self.password)
     begin
-      x.verify_credentials
-      tweets = self.get_tweets(x)
+      tweets = User.fetch_tweets
       last = self.last_tweet_seen
       self.last_tweet_seen = tweets[0].id.to_i if tweets[0]
       self.update
