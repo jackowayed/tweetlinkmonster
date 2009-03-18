@@ -43,14 +43,6 @@ class User
       Tweet.new({:user_id=>self.id, :text=>(status/:text).inner_html, :created_at=>(status/:created_at).inner_html, :author=>(status/:user/:name).inner_html, :author_uname=>(status/:user/:author_uname).inner_html, :twitter_id=>(status/:id).inner_html})
     end
   end
-  def get_tweets(twitter_obj, page = 1)
-    Merb.logger.warn "get_tweets called"
-    options = {:page => page}
-    options[:since_id] = self.last_tweet_seen if self.last_tweet_seen
-    options[:count] = 200
-    Merb.logger.warn options.to_s
-    twitter_obj.timeline(:friends, options)
-  end
   def update_tweets
     begin
       tweets = self.get_tweets
@@ -60,27 +52,25 @@ class User
       #Merb.logger.warn tweets[0].object_id
       #Merb.logger.warn tweets[0].id
       page = 1
-      tweet_page = []
+      tweet_page = [Tweet.new]
       unless last.nil? || last == 0
-        until tweet_page.empty? || tweets.empty? || page==10
-          tweet_page =get_tweets(x, page+=1)
+        until tweet_page.empty? || tweets.empty? || page>=5
+          tweet_page =get_tweets(last, page+=1)# when page initially =1, this gets page 2.
           tweets += tweet_page
           Merb.logger.warn tweet_page.length
         end
       end
       tweets.reverse.each do |t|
-        next unless t.user.screen_name != self.username && Tweet.find_website(t.text) && self.passes_filter?(Tweet.find_website(t.text))
-        title = self.find_site_title(Tweet.find_website(t.text))
-        tweet = Tweet.new({:user_id => self.id, :text => t.text, :created_at => t.created_at, :author => t.user.name, :title => title, :author_uname => t.user.screen_name, :twitter_id => t.id})
-        tweet.save #if t.user.screen_name != self.username && tweet.website
+        next unless t.author != self.username && Tweet.find_website(t.text) && self.passes_filter?(Tweet.find_website(t.text))
+        t.title = self.find_site_title(Tweet.find_website(t.text))
+        t.save #if t.user.screen_name != self.username && tweet.website
       end
     rescue
       Merb.logger.error("Exception #{$!} occurred")
       puts "#{$!} from the tweet-construction loop"
       return false
     end
-
-    return true
+    true
   end
   def expire_tweets
     self.tweets.each do |t|
