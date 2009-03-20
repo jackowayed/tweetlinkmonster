@@ -35,8 +35,8 @@ class User
   def self.consumer
     # The readkey and readsecret below are the values you get during registration
     #TODO get the real vals of these keys when Twitter gets TLM registered 
-  OAuth::Consumer.new("OmwO7wsjtYHjquu6bd6C4w",
-                      "j1kZ6yzsqChkeQtToErUx2LnPQMsSPkXMkiy4F82sPA",
+  OAuth::Consumer.new("M7TCLHwOLr9Wy0H0tkzyhg",
+                      "mgVfkf9RFtFHEl2J5Kfes3OQ4M20HJ7PXLaUAGWLk2E",
                       { :site=>"http://twitter.com" })
 
   end
