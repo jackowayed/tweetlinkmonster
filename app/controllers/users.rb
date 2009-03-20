@@ -133,4 +133,41 @@ class Users < Application
     end
     redirect resource(@user), :message => "Blacklist updated successfully"
   end
+  def send_for_oauth_approval
+    @request_token = User.consumer.get_request_token
+    session[:request_token] = @request_token.token
+    session[:request_token_secret] = @request_token.secret
+    # Send to twitter.com to authorize
+    redirect @request_token.authorize_url
+  end
+  def callback
+    @request_token = OAuth::RequestToken.new(UsersController.consumer,
+                                             session[:request_token],
+                                             session[:request_token_secret])
+
+    # Exchange the request token for an access token.
+    @access_token = @request_token.get_access_token
+    
+    @response = User.consumer.request(:get, '/account/verify_credentials.json',
+                                                 @access_token, { :scheme => :query_string })
+    case @response
+    when Net::HTTPSuccess
+      user_info = JSON.parse(@response.body)
+      
+      unless user_info['screen_name']
+        redirect url(:index), :message => "Authentication failed"
+      end
+
+      # We have an authorized user, use the create method like a rational person
+      @user_params = { :screen_name => user_info['screen_name'],
+                         :token => @access_token.token,
+                         :secret => @access_token.secret }
+      return create, :user => @user_params
+    else
+      Merb.logger.error "Failed to get user info via OAuth!!"
+      # The user might have rejected this application. Or there was some other error during the request.
+
+      redirect url(:index), :message => "Authentication failed"
+    end
+  end
 end # Users
