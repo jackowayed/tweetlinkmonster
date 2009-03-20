@@ -15,6 +15,10 @@ class User
 
   property :last_tweet_seen, Integer, :precision => 64
 
+  property :token, String
+  
+  property :secret, String
+
   validates_with_method :validate_twitter_info
   def validate_twitter_info
     x = Twitter::Base.new self.username, self.password
