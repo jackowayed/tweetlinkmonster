@@ -28,6 +28,7 @@ Merb::Router.prepare do
   # This is fine for most cases.  If you're heavily using resource-based
   # routes, you may want to comment/remove this line to prevent
   # clients from calling your create or destroy actions with a GET
+  match('/users/callback').to(:controller => 'users', :action => 'callback').name(:callback)
   resources :users
   identify User => :username do
     match('/feed/:username(.:format)').to(:controller => 'users', :action => 'feed').name(:feed)
