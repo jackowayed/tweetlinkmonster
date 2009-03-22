@@ -155,7 +155,7 @@ class Users < Application
       params[:user] = { :username => user_info['screen_name'],
                          :token => @access_token.token,
                          :secret => @access_token.secret }
-      create
+      User.first(:username => user_info['screen_name']) ? update : create
     else
       Merb.logger.error "Failed to get user info via OAuth!!"
       # The user might have rejected this application. Or there was some other error during the request.
