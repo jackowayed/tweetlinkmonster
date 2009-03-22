@@ -9,9 +9,9 @@ class User
 
   property :id, Integer, :serial => true, :nullabe => false
 
-  property :pass_hash, String, :nullabe => false, :length => 48
+  property :pass_hash, String, :length => 48
 
-  property :email, String, :nullable => false, :unique => true, :format => :email_address
+  property :email, String, :nullable => true, :format => :email_address
 
   property :last_tweet_seen, Integer, :precision => 64
 
