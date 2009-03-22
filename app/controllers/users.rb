@@ -39,17 +39,10 @@ class Users < Application
     
     
     if @user.save
-      if params[:accept]
-        session[:user_id]=@user.id
-        redirect url(:user, @user.id)
-      else
-        @_message = "You must accept the terms of service."
-        render :new
-      end
+      session[:user_id]=@user.id
+      redirect url(:user, @user.id), :message => "Now fill in your email and password so that you can log in and change settings in the future."
     else
       @_message = error_message_encode @user
-      @_message << "You must accept the terms of service"
-      
       render :new
     end
     
@@ -141,7 +134,7 @@ class Users < Application
     redirect @request_token.authorize_url
   end
   def callback
-    @request_token = OAuth::RequestToken.new(UsersController.consumer,
+    @request_token = OAuth::RequestToken.new(User.consumer,
                                              session[:request_token],
                                              session[:request_token_secret])
 
@@ -159,10 +152,10 @@ class Users < Application
       end
 
       # We have an authorized user, use the create method like a rational person
-      @user_params = { :screen_name => user_info['screen_name'],
+      params[:user] = { :username => user_info['screen_name'],
                          :token => @access_token.token,
                          :secret => @access_token.secret }
-      return create, :user => @user_params
+      create
     else
       Merb.logger.error "Failed to get user info via OAuth!!"
       # The user might have rejected this application. Or there was some other error during the request.
