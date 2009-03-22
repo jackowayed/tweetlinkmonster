@@ -224,4 +224,7 @@ namespace :stats do
   task :user_count do
     run "cd ~ && ./count_tlm_users.sh"
   end
+  task :crontail do
+    run "cd ~ && tail cronlog.log"
+  end
 end
