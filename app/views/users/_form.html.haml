@@ -4,7 +4,7 @@
   %p
     = text_field :username, :label => "Twitter username: "
   %p
-    =  password_field :password, :label => "Twitter password: ", :length => 31
+    =  password_field :password, :label => "Password (NOT your Twitter password): ", :length => 31
   %p
     = text_field :email, :label => "Email: "
   -unless exists
@@ -14,3 +14,4 @@
       = link_to "Terms of Service", url(:terms)
   %p
     = submit((old)?"Update":"Create")
+
