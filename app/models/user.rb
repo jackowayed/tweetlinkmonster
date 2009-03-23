@@ -43,10 +43,10 @@ class User
     @access_token ||= OAuth::AccessToken.new(User.consumer, self.token, self.secret)
   end
   def fetch_tweets(since = nil, page = 1)
-    url = '/friends.xml?count=200'
+    url = '/statuses/friends_timeline.xml?count=200'
     url += "&since_id=#{since}" if since
     url += "&page=#{page}" unless page.nil? || page == 1
-    User.consumer.request(:get, url, self.access_token, {:scheme => :query_string}).body 
+    User.consumer.request(:get, url, self.access_token, {:scheme => :query_string})
   end
   def get_tweets(since = nil, page=1)
     response = self.fetch_tweets since, page
