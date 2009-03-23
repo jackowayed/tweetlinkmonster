@@ -1,0 +1,6 @@
+%h2 Authorize Us
+
+We use Twitter's OAuth now, which is how we manage to work our magic without having to take your password. Click the button below to be sent to a page on Twitter where you can tell them you trust us to access your tweets. 
+
+= form :action => url(:controller => 'users', :action => 'send_for_oauth_approval') do
+  = submit "Go to Authorization Page"
