@@ -33,8 +33,8 @@ class Users < Application
     render
   end
 
-  def create
-    @user = User.new(params[:user])
+  def create(par)
+    @user = User.new((par ? par : params[:user]))
     Merb.logger.warn("User before save: #{@user.to_yaml}")
     
     
@@ -152,11 +152,38 @@ class Users < Application
       end
 
       # We have an authorized user, use the create method like a rational person
-      params[:user] = { :username => user_info['screen_name'],
+      @user_params = { :username => user_info['screen_name'],
                          :token => @access_token.token,
                          :secret => @access_token.secret }
-      params[:id] = User.first(:username => user_info['screen_name']).id
-      params[:id] ? update : create
+      #nil.id ==4 wtf?
+      @user = User.first(:username => user_info['screen_name'])
+      if @user
+        #update
+        raise NotFound unless @user
+        if @user.update_attributes(@user_params) || !@user.dirty?
+          @_message = "Your account has been successfully updated."
+          redirect url(:user, @user), :message => @_message
+        else
+          @_message = error_message_encode @user
+          redirect url(:user, @user), :message => @_message
+        end
+      else
+        #create
+        @user = User.new @user_params
+        Merb.logger.warn("User before save!!!: #{@user.to_yaml}")
+        
+    
+        if @user.save
+          session[:user_id]=@user.id
+          redirect url(:user, @user.id), :message => "Now fill in your email and password so that you can log in and change settings in the future."
+        else
+          @_message = error_message_encode @user
+          render :new
+        end
+      end
+        
+        
+      
     else
       Merb.logger.error "Failed to get user info via OAuth!!"
       # The user might have rejected this application. Or there was some other error during the request.
