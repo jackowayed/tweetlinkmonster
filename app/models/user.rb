@@ -46,12 +46,18 @@ class User
     url = '/friends.xml?count=200'
     url += "&since_id=#{since}" if since
     url += "&page=#{page}" unless page.nil? || page == 1
-    Hpricot.XML User.consumer.request(:get, url, self.access_token, {scheme => :query_string})
+    User.consumer.request(:get, url, self.access_token, {:scheme => :query_string}).body 
   end
   def get_tweets(since = nil, page=1)
-    doc = self.fetch_tweets since, page
-    (doc/:status).collect do |status|
-      Tweet.new({:user_id=>self.id, :text=>(status/:text).inner_html, :created_at=>(status/:created_at).inner_html, :author=>(status/:user/:name).inner_html, :author_uname=>(status/:user/:author_uname).inner_html, :twitter_id=>(status/:id).inner_html})
+    response = self.fetch_tweets since, page
+    case response
+    when Net::HTTPSuccess
+      doc = Hpricot.XML response.body
+      (doc/:status).collect do |status|
+        Tweet.new({:user_id=>self.id, :text=>(status/:text).inner_html, :created_at=>(status/:created_at).inner_html, :author=>(status/:user/:name).inner_html, :author_uname=>(status/:user/:author_uname).inner_html, :twitter_id=>(status/:id).inner_html})
+      end
+    else
+      [Tweet.new({:user_id => self.id, :author_uname => 'TLM NOTIFICATION', :text => "There is probably a problem with your OAuth token.Twitter may have just been down when we tried to get your tweets.", :author => 'TLM'})]
     end
   end
   def update_tweets
@@ -64,7 +70,7 @@ class User
       #Merb.logger.warn tweets[0].id
       page = 1
       tweet_page = [Tweet.new]
-      unless last.nil? || last == 0
+      unless last.nil? || last == 0 || tweets.length < 200
         until tweet_page.empty? || tweets.empty? || page>=5
           tweet_page =get_tweets(last, page+=1)# when page initially =1, this gets page 2.
           tweets += tweet_page
