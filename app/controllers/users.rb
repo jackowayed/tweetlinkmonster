@@ -142,7 +142,7 @@ class Users < Application
     @access_token = @request_token.get_access_token
     
     @response = User.consumer.request(:get, '/account/verify_credentials.json',
-                                                 @access_token, { :scheme => :query_string })
+                                      @access_token, { :scheme => :query_string })
     case @response
     when Net::HTTPSuccess
       user_info = JSON.parse(@response.body)
