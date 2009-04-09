@@ -11,7 +11,7 @@ class Tweet
   property :twitter_id, Integer, :default => nil
 
   def delete_if_expired
-    self.destroy if (Time.now - 1.week) > self.created_at 
+    self.destroy if (Time.now - 4.days) > self.created_at 
   end
   def website
     Tweet.find_website(self.text)
