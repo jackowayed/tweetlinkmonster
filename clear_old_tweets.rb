@@ -1,4 +1,2 @@
 #!/usr/bin/env ruby
-Tweet.all.each do |t|
-  t.delete_if_expired
-end
+Tweet.all(:created_at.lt => Time.now - 3.days).destroy!
