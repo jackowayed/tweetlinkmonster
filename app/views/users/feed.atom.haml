@@ -12,12 +12,12 @@
   %id
     http://www.tweetlinkmonster.com/
 
-  -Tweet.all(:user_id => @user.id, :order => [:created_at.desc]).each do |tweet|
+  if true 
     %entry
       %title
-        =tweet.title||"Title Not Found"
+        Do you love the monster?
       %author
-        %name
+        TLM
           =tweet.author
       %link{:href => httpified_link(tweet.website)}
       %id
