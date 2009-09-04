@@ -21,7 +21,7 @@ set :ssh_options, :forward_agent => true
 set :keep_releases, 3
 
 set :user, "tlm"
-set :password, "ifuckinghartyou"
+set :password, "yourpass"
 
 role :app, "www.tweetlinkmonster.com"
 role :web, "www.tweetlinkmonster.com"
