@@ -6,7 +6,7 @@ This used to live on tweetlinkmonster.com, but I got tired of it, and despite ha
 
 ## Hosting it yourself
 
-It is written in Merb. At the end of its life, the server had merb 1.0.9 on it. It's using DataMapper as its ORM. 
+It is written in Merb. At the end of its life, the server had merb 1.0.9 on it. It's using DataMapper as its ORM. It was running on DM 0.9.10
 
 It should be pretty trivial to host yourself. The deploy file is setup for managing nginx + mongrel (though I think just changing 1 line would let it run thin). I wouldn't do that now, though. I would either host it on [Heroku](http://heroku.com/) or host it on a VPS but use [Phusion Passenger](http://modrails.com/). 
 
